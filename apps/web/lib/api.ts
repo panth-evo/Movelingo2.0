@@ -2,7 +2,7 @@ import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
   SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData,
   ReviewItem, TeachBackSession, SkillNode, TimelineEvent, EligibilityScore,
-  CountryData, ChecklistItem, SimulatorScenario
+  CountryData, ChecklistItem, SimulatorScenario, AdminStats
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -182,5 +182,20 @@ export const api = {
         ? "Guten Tag! Haben Sie alle Ihre Dokumente für die Anmeldung dabei?"
         : "Hallo, wie kann ich Ihnen heute helfen?"
     }), 500));
+  },
+  
+  // Phase 4 Mocks
+  getAdminStats: (): Promise<AdminStats> => {
+    return new Promise(resolve => setTimeout(() => resolve({
+      total_users: 12450,
+      active_learners: 3240,
+      llm_tokens_used: 45000000,
+      grading_accuracy: 94.2,
+      flagged_exams: [
+        { id: 'ex_991', user_name: 'John Doe', paper: 'Goethe B1', confidence: 45, issue: 'Ambiguous writing response' },
+        { id: 'ex_992', user_name: 'Anna Schmidt', paper: 'Telc B2', confidence: 60, issue: 'Speech recognition failure' },
+        { id: 'ex_993', user_name: 'Carlos Ruiz', paper: 'TestDaF', confidence: 55, issue: 'Audio corrupted' }
+      ]
+    }), 400));
   }
 };

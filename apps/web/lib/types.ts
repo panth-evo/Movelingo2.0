@@ -348,3 +348,17 @@ export interface SimulatorScenario {
   description: string;
   difficulty: 'easy' | 'medium' | 'hard';
 }
+
+export interface AdminStats {
+  total_users: number;
+  active_learners: number;
+  llm_tokens_used: number;
+  grading_accuracy: number;
+  flagged_exams: Array<{
+    id: string;
+    user_name: string;
+    paper: string;
+    confidence: number;
+    issue: string;
+  }>;
+}
