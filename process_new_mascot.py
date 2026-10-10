@@ -20,12 +20,12 @@ try:
     
     width, height = img.size
     
-    # Crop the top 80% for the mascot
-    mascot_crop = img.crop((0, 0, width, int(height * 0.8)))
+    # Crop the top 75% for the mascot
+    mascot_crop = img.crop((0, 0, width, int(height * 0.75)))
     mascot_nobg = remove_white_bg(mascot_crop)
     
-    # Crop the bottom 20% for the logo text
-    logo_crop = img.crop((0, int(height * 0.8), width, height))
+    # Crop the bottom 25% for the logo text
+    logo_crop = img.crop((0, int(height * 0.75), width, height))
     logo_nobg = remove_white_bg(logo_crop)
 
     # Save them
