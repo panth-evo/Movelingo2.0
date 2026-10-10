@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Suspense } from 'react'
 import './globals.css'
 
@@ -22,7 +23,9 @@ export default function RootLayout({
         <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
           <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div className="flex items-center gap-8">
-              <Link href="/" className="text-xl font-bold text-blue-600 tracking-tight">MoveLingo</Link>
+              <Link href="/" className="flex items-center">
+                <Image src="/logo.png" alt="MoveLingo" width={140} height={40} className="object-contain" priority />
+              </Link>
               <div className="hidden sm:flex gap-6 text-sm font-medium text-slate-600">
                 <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
                 <Link href="/dashboard" className="hover:text-blue-600 transition-colors">Dashboard</Link>
