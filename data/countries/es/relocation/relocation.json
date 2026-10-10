@@ -1,0 +1,110 @@
+{
+  "country": "ES",
+  "routes": [
+    {
+      "id": "es-work",
+      "name": "Work and employment visa",
+      "purpose": "work",
+      "required_language_level": null,
+      "summary": "A visa for non-EU/EEA workers with a job offer in Spain. The employer usually starts the process in Spain. Language requirement not yet verified - check the official site.",
+      "eligibility": [
+        "You have a job offer or employment contract in Spain",
+        "Your employer files the initial application with Spanish authorities",
+        "You hold a passport valid for the planned stay",
+        "You have no criminal record from countries you lived in (document rules not yet verified)",
+        "No language level is listed because it has not been verified yet - check the official site"
+      ],
+      "fees": [
+        {
+          "label": "Visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        },
+        {
+          "label": "Foreigner identity card (TIE) after arrival",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://exteriores.gob.es/",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "es-non-lucrative",
+      "name": "Non-lucrative residence visa",
+      "purpose": "settle",
+      "required_language_level": null,
+      "summary": "A residence visa for people who want to live in Spain without working there, showing their own financial means. Required income figures are not yet verified - check the official site.",
+      "eligibility": [
+        "You can prove sufficient financial means to support yourself (amount not yet verified)",
+        "You have private health insurance with an authorised insurer",
+        "You hold a passport valid for the planned stay",
+        "You have no criminal record from countries you lived in (document rules not yet verified)"
+      ],
+      "fees": [
+        {
+          "label": "Visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://exteriores.gob.es/",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "es-student",
+      "name": "Student residence visa",
+      "purpose": "study",
+      "required_language_level": null,
+      "summary": "A visa for full-time studies at an accredited institution in Spain. Language requirement for your course is not yet verified - check the official site.",
+      "eligibility": [
+        "You have an admission or enrolment letter from an accredited institution",
+        "You can show you can cover your living costs (amount not yet verified)",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for Spain"
+      ],
+      "fees": [
+        {
+          "label": "Visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://exteriores.gob.es/",
+      "last_verified": null,
+      "verified": false
+    }
+  ],
+  "checklist": [
+    { "id": "passport", "label": "Passport valid for the stay", "needs_translation": false, "needs_apostille": false },
+    { "id": "degree", "label": "Degree or qualification certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "criminal-record", "label": "Criminal record certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "job-contract", "label": "Employment contract or job offer", "needs_translation": true, "needs_apostille": false },
+    { "id": "health-insurance", "label": "Health insurance proof", "needs_translation": false, "needs_apostille": false },
+    { "id": "cv", "label": "CV in Spanish", "needs_translation": true, "needs_apostille": false }
+  ],
+  "cities": [
+    { "name": "Madrid", "rent_range_eur": null, "note": "Capital and largest job market; rent figures not yet verified" },
+    { "name": "Barcelona", "rent_range_eur": null, "note": "Tech and tourism hub; rent figures not yet verified" },
+    { "name": "Valencia", "rent_range_eur": null, "note": "Growing tech scene on the coast; rent figures not yet verified" },
+    { "name": "Seville", "rent_range_eur": null, "note": "Regional capital with public administration jobs; rent figures not yet verified" }
+  ],
+  "sources": [
+    {
+      "label": "Spanish Ministry of Foreign Affairs, European Union and Cooperation",
+      "url": "https://exteriores.gob.es/",
+      "last_verified": null
+    },
+    {
+      "label": "Spanish consular services",
+      "url": "https://exteriores.gob.es/en/servicios-consulares/",
+      "last_verified": null
+    }
+  ]
+}

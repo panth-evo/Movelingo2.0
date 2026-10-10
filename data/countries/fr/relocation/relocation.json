@@ -1,0 +1,110 @@
+{
+  "country": "FR",
+  "routes": [
+    {
+      "id": "fr-talent",
+      "name": "Passeport Talent - qualified worker",
+      "purpose": "work",
+      "required_language_level": null,
+      "summary": "A multi-year residence permit for qualified workers, including employees on a qualifying contract and certain graduates. Salary thresholds and contract conditions are not yet verified - check the official site.",
+      "eligibility": [
+        "You have an employment contract or a binding job offer in France",
+        "Your qualification or salary meets the conditions for this permit (figures not yet verified)",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for France",
+        "No language level is listed because it has not been verified yet - check the official site"
+      ],
+      "fees": [
+        {
+          "label": "Long-stay visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        },
+        {
+          "label": "Residence permit (titre de séjour) after arrival",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://france-visas.gouv.fr/",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "fr-student",
+      "name": "Student visa (visa étudiant)",
+      "purpose": "study",
+      "required_language_level": null,
+      "summary": "A long-stay visa for full-time studies in France. Language requirement for your course is not yet verified - check the official site.",
+      "eligibility": [
+        "You have an admission or enrolment confirmation from a French institution",
+        "You can show you can cover your living costs (amount not yet verified)",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for France"
+      ],
+      "fees": [
+        {
+          "label": "Long-stay visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://france-visas.gouv.fr/",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "fr-family",
+      "name": "Family reunification visa",
+      "purpose": "family",
+      "required_language_level": null,
+      "summary": "A visa for joining a family member who is legally resident in France. Requirements and waiting conditions are not yet verified - check the official site.",
+      "eligibility": [
+        "A family member residing in France sponsors your application",
+        "You provide proof of the family relationship (document rules not yet verified)",
+        "Housing and income conditions for the sponsor apply (figures not yet verified)",
+        "You hold a passport valid for the planned stay"
+      ],
+      "fees": [
+        {
+          "label": "Long-stay visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://france-visas.gouv.fr/",
+      "last_verified": null,
+      "verified": false
+    }
+  ],
+  "checklist": [
+    { "id": "passport", "label": "Passport valid for the stay", "needs_translation": false, "needs_apostille": false },
+    { "id": "degree", "label": "Degree or qualification certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "birth-certificate", "label": "Birth certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "job-contract", "label": "Employment contract or job offer", "needs_translation": true, "needs_apostille": false },
+    { "id": "health-insurance", "label": "Health insurance proof", "needs_translation": false, "needs_apostille": false },
+    { "id": "cv", "label": "CV in French", "needs_translation": true, "needs_apostille": false }
+  ],
+  "cities": [
+    { "name": "Paris", "rent_range_eur": null, "note": "Largest job market and highest costs; rent figures not yet verified" },
+    { "name": "Lyon", "rent_range_eur": null, "note": "Industry, pharma and tech jobs; rent figures not yet verified" },
+    { "name": "Marseille", "rent_range_eur": null, "note": "Port city with logistics and services jobs; rent figures not yet verified" },
+    { "name": "Lille", "rent_range_eur": null, "note": "Northern hub with cross-border commuting; rent figures not yet verified" }
+  ],
+  "sources": [
+    {
+      "label": "France Visas - official visa portal",
+      "url": "https://france-visas.gouv.fr/",
+      "last_verified": null
+    },
+    {
+      "label": "French Ministry for Europe and Foreign Affairs",
+      "url": "https://www.diplomatie.gouv.fr/en/",
+      "last_verified": null
+    }
+  ]
+}

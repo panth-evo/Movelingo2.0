@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    # We use pgvector image because standard postgres does not have the extension
+    image: ankane/pgvector:latest
+    container_name: movelingo_db
+    environment:
+      POSTGRES_USER: movelingo
+      POSTGRES_PASSWORD: movelingo
+      POSTGRES_DB: movelingo
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  pgdata:
