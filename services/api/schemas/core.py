@@ -121,3 +121,59 @@ class ProgressResponse(Strict):
     target_level: Level
     updated_at: str | None
     levels: list[LevelCard] = Field(min_length=5, max_length=5)
+
+
+# --- placement (section 5) ---
+
+class PlacementInput(Strict):
+    language: Language
+    placed_level: Level
+
+
+# --- RelocationInfo (section 6) ---
+
+class RelocationFee(Strict):
+    label: str
+    amount: float | None  # null until a human verifies it on an official page
+    currency: str
+    source_url: str | None
+
+
+class RelocationRoute(Strict):
+    id: str
+    name: str
+    purpose: Literal["work", "study", "settle", "family"]
+    required_language_level: Level | None
+    summary: str
+    eligibility: list[str]
+    fees: list[RelocationFee]
+    official_url: str | None
+    last_verified: str | None  # YYYY-MM-DD
+    verified: bool
+
+
+class ChecklistItem(Strict):
+    id: str
+    label: str
+    needs_translation: bool
+    needs_apostille: bool
+
+
+class RelocationCity(Strict):
+    name: str
+    rent_range_eur: float | None
+    note: str
+
+
+class RelocationSource(Strict):
+    label: str
+    url: str
+    last_verified: str | None
+
+
+class RelocationInfo(Strict):
+    country: Literal["DE", "ES", "FR", "IT"]
+    routes: list[RelocationRoute]
+    checklist: list[ChecklistItem]
+    cities: list[RelocationCity]
+    sources: list[RelocationSource]

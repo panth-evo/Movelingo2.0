@@ -175,6 +175,57 @@ def compute_progress(db: Session, user_id: str, language: str) -> ProgressRespon
     )
 
 
+def certify_levels_below(db: Session, user_id: str, language: str, placed_level: str) -> None:
+    """Placement (CONTRACT.md section 4): every level BELOW placed_level becomes
+    certified for all six skills with source="placement". placed_level and above
+    are never touched, and nothing ever un-certifies. Commits."""
+    if placed_level not in LEVELS:
+        raise ValueError(f"invalid level: {placed_level!r}")
+    for level in LEVELS[: LEVELS.index(placed_level)]:
+        for skill in SKILLS:
+            row = db.scalar(
+                select(LanguageProgress).where(
+                    LanguageProgress.user_id == user_id,
+                    LanguageProgress.language == language,
+                    LanguageProgress.level == level,
+                    LanguageProgress.skill == skill,
+                )
+            )
+            if row is None:
+                db.add(
+                    LanguageProgress(
+                        user_id=user_id,
+                        language=language,
+                        level=level,
+                        skill=skill,
+                        attempted=0.0,
+                        correct=0.0,
+                        exam_history=[],
+                        exam_best=0.0,
+                        certified=True,
+                        source="placement",
+                    )
+                )
+            else:
+                row.certified = True
+                row.source = "placement"
+                row.updated_at = utcnow_iso()
+            db.add(
+                ProgressEvent(
+                    user_id=user_id,
+                    language=language,
+                    level=level,
+                    skill=skill,
+                    source="placement",
+                    attempted=0.0,
+                    correct=0.0,
+                    section_ratio=None,
+                    passed=None,
+                )
+            )
+    db.commit()
+
+
 def _target_level(db: Session, user_id: str, language: str) -> str:
     plan = db.scalar(
         select(Plan)

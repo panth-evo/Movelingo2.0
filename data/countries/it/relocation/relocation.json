@@ -1,0 +1,110 @@
+{
+  "country": "IT",
+  "routes": [
+    {
+      "id": "it-work",
+      "name": "Work residence visa (nulla ostra per lavoro)",
+      "purpose": "work",
+      "required_language_level": null,
+      "summary": "An entry visa for paid employment in Italy. Your employer usually obtains a nulla ostra first; annual quota rules may apply and current numbers are not yet verified - check the official site.",
+      "eligibility": [
+        "Your employer holds a nulla ostra for your role (quota rules not yet verified)",
+        "You have a job offer or employment contract in Italy",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for Italy",
+        "No language level is listed because it has not been verified yet - check the official site"
+      ],
+      "fees": [
+        {
+          "label": "Visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        },
+        {
+          "label": "Permesso di soggiorno after arrival",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://vistoperitalia.esteri.it/",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "it-student",
+      "name": "Student visa (visto per studio)",
+      "purpose": "study",
+      "required_language_level": null,
+      "summary": "An entry visa for enrolment at an Italian university or institution. Language requirement for your course is not yet verified - check the official site.",
+      "eligibility": [
+        "You have an admission or enrolment letter from an Italian institution",
+        "You can show you can cover your living costs (amount not yet verified)",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for Italy"
+      ],
+      "fees": [
+        {
+          "label": "Visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://vistoperitalia.esteri.it/",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "it-family",
+      "name": "Family reunification visa",
+      "purpose": "family",
+      "required_language_level": null,
+      "summary": "An entry visa to join a family member who is legally resident in Italy. Requirements are not yet verified - check the official site.",
+      "eligibility": [
+        "A family member residing in Italy sponsors your application",
+        "You provide proof of the family relationship (document rules not yet verified)",
+        "Housing conditions for the sponsor apply (details not yet verified)",
+        "You hold a passport valid for the planned stay"
+      ],
+      "fees": [
+        {
+          "label": "Visa application",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://vistoperitalia.esteri.it/",
+      "last_verified": null,
+      "verified": false
+    }
+  ],
+  "checklist": [
+    { "id": "passport", "label": "Passport valid for the stay", "needs_translation": false, "needs_apostille": false },
+    { "id": "degree", "label": "Degree or qualification certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "criminal-record", "label": "Criminal record certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "job-contract", "label": "Employment contract or job offer", "needs_translation": true, "needs_apostille": false },
+    { "id": "health-insurance", "label": "Health insurance proof", "needs_translation": false, "needs_apostille": false },
+    { "id": "cv", "label": "CV in Italian", "needs_translation": true, "needs_apostille": false }
+  ],
+  "cities": [
+    { "name": "Rome", "rent_range_eur": null, "note": "Capital with public administration and services jobs; rent figures not yet verified" },
+    { "name": "Milan", "rent_range_eur": null, "note": "Finance, fashion and tech hub; rent figures not yet verified" },
+    { "name": "Turin", "rent_range_eur": null, "note": "Engineering and automotive centre; rent figures not yet verified" },
+    { "name": "Bologna", "rent_range_eur": null, "note": "University city with rail and logistics links; rent figures not yet verified" }
+  ],
+  "sources": [
+    {
+      "label": "Italian visa portal (Visto per l'Italia)",
+      "url": "https://vistoperitalia.esteri.it/",
+      "last_verified": null
+    },
+    {
+      "label": "Italian Ministry of Foreign Affairs and International Cooperation",
+      "url": "https://www.esteri.it/en/",
+      "last_verified": null
+    }
+  ]
+}

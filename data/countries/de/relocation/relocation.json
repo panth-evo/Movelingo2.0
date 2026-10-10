@@ -1,0 +1,110 @@
+{
+  "country": "DE",
+  "routes": [
+    {
+      "id": "de-skilled-work",
+      "name": "Skilled worker residence permit",
+      "purpose": "work",
+      "required_language_level": null,
+      "summary": "A residence permit for qualified skilled workers with a job offer related to their qualification. Recognition of your qualification may be required. The language requirement is not stated here because it has not been verified against the official source yet.",
+      "eligibility": [
+        "You have a concrete job offer or an employment contract in Germany",
+        "Your qualification is recognised in Germany or is equivalent to a German qualification",
+        "You hold a passport valid for your planned stay",
+        "You have health insurance cover for Germany",
+        "No language level is listed because it has not been verified yet - check the official site"
+      ],
+      "fees": [
+        {
+          "label": "National visa application (type D)",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        },
+        {
+          "label": "Residence permit issuance (after arrival)",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://www.make-it-in-germany.com/en/visa-residence/types/skilled-immigration-act",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "de-job-seeker",
+      "name": "Job seeker visa",
+      "purpose": "work",
+      "required_language_level": null,
+      "summary": "A visa that lets you look for a qualified job in Germany while staying in the country. Language requirement not yet verified - check the official site.",
+      "eligibility": [
+        "You hold a qualification that is recognised in Germany",
+        "You can show you have enough money for your stay (amount not yet verified)",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for Germany"
+      ],
+      "fees": [
+        {
+          "label": "National visa application (type D)",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://www.make-it-in-germany.com/en/visa-residence/types/job-seeker",
+      "last_verified": null,
+      "verified": false
+    },
+    {
+      "id": "de-student",
+      "name": "Student residence permit",
+      "purpose": "study",
+      "required_language_level": null,
+      "summary": "A residence permit for a recognised full-time course of study at a German university or college. Language requirement for your course is not yet verified - check the official site.",
+      "eligibility": [
+        "You have an admission letter from a German higher education institution",
+        "You can show you can cover your living costs (amount not yet verified)",
+        "You hold a passport valid for the planned stay",
+        "You have health insurance cover for Germany"
+      ],
+      "fees": [
+        {
+          "label": "National visa application (type D)",
+          "amount": null,
+          "currency": "EUR",
+          "source_url": null
+        }
+      ],
+      "official_url": "https://www.make-it-in-germany.com/en/visa-residence/types/students",
+      "last_verified": null,
+      "verified": false
+    }
+  ],
+  "checklist": [
+    { "id": "passport", "label": "Passport valid for the stay", "needs_translation": false, "needs_apostille": false },
+    { "id": "degree", "label": "Degree or qualification certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "job-contract", "label": "Employment contract or job offer", "needs_translation": true, "needs_apostille": false },
+    { "id": "birth-certificate", "label": "Birth certificate", "needs_translation": true, "needs_apostille": true },
+    { "id": "health-insurance", "label": "Health insurance proof", "needs_translation": false, "needs_apostille": false },
+    { "id": "cv", "label": "CV in German", "needs_translation": true, "needs_apostille": false }
+  ],
+  "cities": [
+    { "name": "Berlin", "rent_range_eur": null, "note": "Capital and large job market; rent figures not yet verified" },
+    { "name": "Munich", "rent_range_eur": null, "note": "Strong engineering and automotive market; rent figures not yet verified" },
+    { "name": "Hamburg", "rent_range_eur": null, "note": "Port city with logistics and media jobs; rent figures not yet verified" },
+    { "name": "Frankfurt", "rent_range_eur": null, "note": "Finance and aviation hub; rent figures not yet verified" }
+  ],
+  "sources": [
+    {
+      "label": "Make it in Germany - official immigration portal",
+      "url": "https://www.make-it-in-germany.com/",
+      "last_verified": null
+    },
+    {
+      "label": "German Federal Foreign Office - visas",
+      "url": "https://www.auswaertiges-amt.de/en/service/visa",
+      "last_verified": null
+    }
+  ]
+}
