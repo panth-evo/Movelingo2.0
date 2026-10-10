@@ -15,24 +15,17 @@ def remove_white_bg(img):
     return img
 
 try:
-    path = 'C:/Users/Carmy/.gemini/antigravity-ide/brain/4d2767d1-1eea-4565-bdd1-95a77605f9f6/.user_uploaded/media_1791630846238.jpg'
+    path = 'C:/Users/Carmy/.gemini/antigravity-ide/brain/4d2767d1-1eea-4565-bdd1-95a77605f9f6/.user_uploaded/media_1791631442616.jpg'
     img = Image.open(path)
     
     width, height = img.size
-    
-    # Crop the top 78% for the mascot
-    mascot_crop = img.crop((0, 0, width, int(height * 0.78)))
-    mascot_nobg = remove_white_bg(mascot_crop)
-    
-    # Crop the bottom 22% for the logo text
-    logo_crop = img.crop((0, int(height * 0.78), width, height))
-    logo_nobg = remove_white_bg(logo_crop)
+    # Process the whole image
+    mascot_nobg = remove_white_bg(img)
 
     # Save them
     out_dir = 'c:/Users/Carmy/Documents/Movelingo/apps/web/public'
     os.makedirs(out_dir, exist_ok=True)
     mascot_nobg.save(os.path.join(out_dir, 'mascot.png'), "PNG")
-    logo_nobg.save(os.path.join(out_dir, 'logo.png'), "PNG")
     
     print("Successfully processed and saved mascot.png and logo.png")
 except Exception as e:
