@@ -56,7 +56,55 @@ const fetchFixture = async (path: string, options: RequestInit) => {
     if (path.startsWith('/api/exams/specs')) return (await import('../fixtures/specs_de.json')).default;
     if (path === '/api/exams/generate' && method === 'POST') return { paper_id: 'goethe_b1_mock_123', status: 'ready' };
     if (path.startsWith('/api/exams/papers/') && method === 'GET') return (await import('../fixtures/exam_paper_goethe_b1.json')).default;
-    if (path.includes('/submit') && method === 'POST') return (await import('../fixtures/section_result_reading.json')).default;
+    if (path.includes('/submit') && method === 'POST') {
+      const fixture = (await import('../fixtures/section_result_reading.json')).default;
+      let body: any = {};
+      try { body = JSON.parse(options.body as string); } catch(e){}
+      const answers = body.answers || {};
+      const skill = body.skill || fixture.skill;
+      
+      const correctAnswers: Record<string, string> = {
+        'r_p1_i1': 'false',
+        'r_p1_i2': 'false',
+        'r_p2_i1': 'b',
+        'l_p1_i1': 'false',
+        'l_p1_i2': 'true',
+        'l_p2_i1': 'c'
+      };
+      
+      let raw = 0;
+      let max = 0;
+      
+      for (const key in correctAnswers) {
+        if (key.startsWith(skill.charAt(0))) {
+          max++;
+          if (answers[key] === correctAnswers[key]) {
+            raw++;
+          }
+        }
+      }
+      
+      if (skill === 'writing' || skill === 'speaking') {
+         raw = 100; max = 100;
+      } else if (max === 0) {
+         raw = 0; max = 30;
+      }
+      
+      const ratio = raw / max;
+      const scaled_100 = Math.round(ratio * 100);
+      const passed = ratio >= 0.6;
+      
+      return {
+        ...fixture,
+        skill: skill,
+        raw,
+        max,
+        ratio,
+        scaled_100,
+        passed,
+        summary: passed ? `Great job! You passed the ${skill} section.` : `Keep practicing! You didn't pass the ${skill} section this time.`,
+      };
+    }
     if (path.startsWith('/api/exams/results')) return [(await import('../fixtures/section_result_reading.json')).default];
     
     return {};
