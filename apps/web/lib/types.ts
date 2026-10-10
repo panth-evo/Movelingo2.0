@@ -321,3 +321,15 @@ export interface EligibilityScore {
   eligible: boolean;
   missing_requirements: string[];
 }
+
+export interface CountryData {
+  id: string;
+  country: string;
+  flag: string;
+  avg_rent_1bed: number;
+  avg_salary_tech: number;
+  visa_processing_weeks: number;
+  language_requirement: string;
+  healthcare_quality: string;
+  cost_of_living_index: number;
+}

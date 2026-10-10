@@ -1,7 +1,8 @@
 import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
   SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData,
-  ReviewItem, TeachBackSession, SkillNode, TimelineEvent, EligibilityScore
+  ReviewItem, TeachBackSession, SkillNode, TimelineEvent, EligibilityScore,
+  CountryData
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -149,5 +150,12 @@ export const api = {
       eligible: answers.degree === 'yes' && answers.salary === 'high',
       missing_requirements: answers.degree === 'no' ? ['Recognized University Degree'] : (answers.salary !== 'high' ? ['Minimum Salary Threshold'] : [])
     }), 800));
+  },
+  getCountryComparison: (): Promise<CountryData[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([
+      { id: 'c1', country: 'Germany', flag: '🇩🇪', avg_rent_1bed: 950, avg_salary_tech: 65000, visa_processing_weeks: 12, language_requirement: 'B1 (often preferred)', healthcare_quality: 'Excellent', cost_of_living_index: 73 },
+      { id: 'c2', country: 'Austria', flag: '🇦🇹', avg_rent_1bed: 850, avg_salary_tech: 58000, visa_processing_weeks: 8, language_requirement: 'A2-B1', healthcare_quality: 'Excellent', cost_of_living_index: 75 },
+      { id: 'c3', country: 'Switzerland', flag: '🇨🇭', avg_rent_1bed: 1800, avg_salary_tech: 110000, visa_processing_weeks: 16, language_requirement: 'B2', healthcare_quality: 'World Class', cost_of_living_index: 122 }
+    ]), 400));
   },
 };
