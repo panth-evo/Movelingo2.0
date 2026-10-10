@@ -182,13 +182,41 @@ export const api = {
   
   // Phase 3 Mocks
   getTimeline: (): Promise<TimelineEvent[]> => {
-    return new Promise(resolve => setTimeout(() => resolve([
-      { id: 't1', title: 'Start A1 Course', date: '2024-01-15', type: 'language', status: 'completed' },
-      { id: 't2', title: 'Book Goethe B1 Exam', date: '2024-05-01', type: 'admin', status: 'current' },
-      { id: 't3', title: 'Pass B1 Exam', date: '2024-06-15', type: 'language', status: 'upcoming' },
-      { id: 't4', title: 'Submit Visa Application', date: '2024-07-01', type: 'relocation', status: 'upcoming' },
-      { id: 't5', title: 'Move to Germany', date: '2024-09-01', type: 'relocation', status: 'upcoming' }
-    ]), 400));
+    return new Promise(resolve => setTimeout(() => {
+      let moveDate = new Date('2024-09-01');
+      let targetCountry = 'Germany';
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('onboarding_draft');
+        if (stored) {
+          try {
+            const data = JSON.parse(stored);
+            if (data.goal && data.goal.move_deadline) {
+              moveDate = new Date(data.goal.move_deadline);
+            }
+            if (data.goal && data.goal.target_country) {
+               const map: Record<string, string> = { DE: 'Germany', ES: 'Spain', FR: 'France', IT: 'Italy' };
+               targetCountry = map[data.goal.target_country] || 'Germany';
+            }
+          } catch (e) {}
+        }
+      }
+
+      const formatDate = (d: Date) => d.toISOString().split('T')[0];
+      
+      const t5 = new Date(moveDate);
+      const t4 = new Date(moveDate); t4.setMonth(t4.getMonth() - 2);
+      const t3 = new Date(moveDate); t3.setMonth(t3.getMonth() - 2); t3.setDate(t3.getDate() - 15);
+      const t2 = new Date(moveDate); t2.setMonth(t2.getMonth() - 4);
+      const t1 = new Date(moveDate); t1.setMonth(t1.getMonth() - 8);
+
+      resolve([
+        { id: 't1', title: 'Start A1 Course', date: formatDate(t1), type: 'language', status: 'completed' },
+        { id: 't2', title: 'Book Exam', date: formatDate(t2), type: 'admin', status: 'current' },
+        { id: 't3', title: 'Pass Exam', date: formatDate(t3), type: 'language', status: 'upcoming' },
+        { id: 't4', title: 'Submit Visa Application', date: formatDate(t4), type: 'relocation', status: 'upcoming' },
+        { id: 't5', title: `Move to ${targetCountry}`, date: formatDate(t5), type: 'relocation', status: 'upcoming' }
+      ]);
+    }, 400));
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   checkEligibility: (answers: Record<string, string>): Promise<EligibilityScore> => {

@@ -23,24 +23,15 @@ export function OnboardingProvider({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     const savedData = localStorage.getItem('onboarding_draft');
-    let hasName = false;
     if (savedData) {
       try {
         const parsed = JSON.parse(savedData);
         setData(parsed);
-        if (parsed.name) hasName = true;
       } catch (e) {}
     }
-    const savedStep = localStorage.getItem('onboarding_step');
-    if (savedStep) {
-      const step = parseInt(savedStep, 10);
-      if (step > 1 && !hasName) {
-        setCurrentStep(1);
-        localStorage.setItem('onboarding_step', '1');
-      } else {
-        setCurrentStep(step);
-      }
-    }
+    // Always start at step 1 on refresh for the demo
+    setCurrentStep(1);
+    localStorage.setItem('onboarding_step', '1');
     setIsHydrated(true);
   }, []);
 
