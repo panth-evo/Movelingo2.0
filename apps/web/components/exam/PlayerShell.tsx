@@ -100,13 +100,13 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
       {/* TOP BAR */}
-      <div className="bg-slate-900 text-white px-6 py-4 flex justify-between items-center shrink-0 shadow-lg z-10">
-        <div className="font-black tracking-widest uppercase flex items-center gap-4">
-          <span className="text-blue-400">{paper.exam_name}</span>
-          <span className="w-1.5 h-1.5 bg-slate-700 rounded-full" />
-          <span className="text-slate-100">{section.skill}</span>
+      <div className="bg-slate-900 text-white px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center shrink-0 shadow-lg z-10 gap-4 min-w-0">
+        <div className="font-black tracking-widest uppercase flex flex-wrap items-center gap-2 sm:gap-4 min-w-0 break-words">
+          <span className="text-blue-400 break-words">{paper.exam_name}</span>
+          <span className="w-1.5 h-1.5 bg-slate-700 rounded-full shrink-0" />
+          <span className="text-slate-100 break-words">{section.skill}</span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 shrink-0">
           <div className={`flex items-center gap-3 font-mono text-2xl px-5 py-2 rounded-xl transition-colors ${timeLeft && timeLeft < 60 ? 'bg-red-950 text-red-400 animate-pulse' : 'bg-slate-800 text-slate-100'}`}>
             <Clock className={`w-5 h-5 ${timeLeft && timeLeft < 60 ? 'text-red-500' : 'text-slate-400'}`} />
             {timeLeft !== null ? formatTime(timeLeft) : '--:--'}
@@ -130,7 +130,7 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
               key={p.part_id}
               disabled={isListening && i !== partIdx} // Strict sequential fixed order for listening
               onClick={() => setPartIdx(i)}
-              className={`text-left p-4 rounded-2xl border-2 transition-all min-w-[200px] lg:min-w-0 shrink-0 ${
+              className={`text-left p-4 rounded-2xl border-2 transition-all min-w-[200px] lg:min-w-0 shrink-0 break-words whitespace-normal ${
                 i === partIdx ? 'bg-blue-50 border-blue-400 text-blue-900 shadow-sm' : 
 
                 (isListening && i !== partIdx) ? 'bg-slate-50 border-transparent text-slate-400 opacity-50 cursor-not-allowed' :
@@ -173,7 +173,15 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
                 >
                   Continue to next part <ChevronRight className="w-5 h-5" />
                 </button>
-             ) : null}
+             ) : (
+                <button 
+                  onClick={() => confirm('Are you sure you want to submit this section?') && handleSubmit()}
+                  disabled={submitting}
+                  className="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-sm hover:bg-blue-500 transition-colors flex items-center gap-2 disabled:opacity-50"
+                >
+                  {submitting ? 'Submitting...' : 'Submit Section'} <ChevronRight className="w-5 h-5" />
+                </button>
+             )}
           </div>
         </div>
       </div>

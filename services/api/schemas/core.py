@@ -68,6 +68,7 @@ class Study(Strict):
 
 
 class ProfileInput(Strict):
+    name: str = "User"
     age: int
     nationality: str
     current_country: str

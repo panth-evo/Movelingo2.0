@@ -3,9 +3,23 @@
 import { useOnboarding } from './OnboardingContext';
 import { StepForms } from '@/components/onboarding/StepForms';
 import { PlacementTest } from '@/components/onboarding/PlacementTest';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, Suspense } from 'react';
 
-export default function OnboardingPage() {
-  const { currentStep, isHydrated } = useOnboarding();
+function OnboardingContent() {
+  const { currentStep, isHydrated, updateData, data } = useOnboarding();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (isHydrated && searchParams?.has('country') && !data.goal?.target_country) {
+      const country = searchParams.get('country');
+      if (country) {
+        setTimeout(() => {
+          updateData({ goal: { ...data.goal, target_country: country as any, purpose: data.goal?.purpose || '' } as any });
+        }, 0);
+      }
+    }
+  }, [isHydrated, searchParams, data.goal?.target_country, updateData]);
 
   if (!isHydrated) return null; // Avoid hydration mismatch on initial render
 
@@ -32,3 +46,12 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
+export default function OnboardingPage() {
+  return (
+    <Suspense fallback={<div className="p-10 text-center text-slate-500">Loading onboarding...</div>}>
+      <OnboardingContent />
+    </Suspense>
+  );
+}
+

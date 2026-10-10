@@ -186,16 +186,38 @@ export const api = {
   
   // Phase 4 Mocks
   getAdminStats: (): Promise<AdminStats> => {
-    return new Promise(resolve => setTimeout(() => resolve({
-      total_users: 12450,
-      active_learners: 3240,
-      llm_tokens_used: 45000000,
-      grading_accuracy: 94.2,
-      flagged_exams: [
-        { id: 'ex_991', user_name: 'John Doe', paper: 'Goethe B1', confidence: 45, issue: 'Ambiguous writing response' },
-        { id: 'ex_992', user_name: 'Anna Schmidt', paper: 'Telc B2', confidence: 60, issue: 'Speech recognition failure' },
-        { id: 'ex_993', user_name: 'Carlos Ruiz', paper: 'TestDaF', confidence: 55, issue: 'Audio corrupted' }
-      ]
-    }), 400));
+    return new Promise(resolve => setTimeout(() => {
+      const extraExams = [];
+      if (typeof window !== 'undefined') {
+        const stored = localStorage.getItem('onboarding_draft');
+        if (stored) {
+          try {
+            const data = JSON.parse(stored);
+            if (data.name) {
+              const placed = localStorage.getItem('actual_placed_level') || 'A2';
+              extraExams.push({
+                id: 'ex_994',
+                user_name: data.name,
+                paper: `Placement Test (${placed})`,
+                confidence: 42,
+                issue: 'Needs manual grading for writing task'
+              });
+            }
+          } catch (e) {}
+        }
+      }
+      resolve({
+        total_users: extraExams.length ? 12451 : 12450,
+        active_learners: extraExams.length ? 3241 : 3240,
+        llm_tokens_used: 45000000,
+        grading_accuracy: 94.2,
+        flagged_exams: [
+          ...extraExams,
+          { id: 'ex_991', user_name: 'John Doe', paper: 'Goethe B1', confidence: 45, issue: 'Ambiguous writing response' },
+          { id: 'ex_992', user_name: 'Anna Schmidt', paper: 'Telc B2', confidence: 60, issue: 'Speech recognition failure' },
+          { id: 'ex_993', user_name: 'Carlos Ruiz', paper: 'TestDaF', confidence: 55, issue: 'Audio corrupted' }
+        ]
+      });
+    }, 400));
   }
 };

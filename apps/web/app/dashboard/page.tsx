@@ -14,18 +14,32 @@ export default function DashboardPage() {
   const [plan, setPlan] = useState<PlanResult | null>(null);
   const [progress, setProgress] = useState<ProgressResponse | null>(null);
   const [relocation, setRelocation] = useState<RelocationInfo | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const lang = (typeof window !== 'undefined' ? localStorage.getItem('target_language') || 'de' : 'de') as Language;
     Promise.all([
       api.getPlan(),
-      api.getProgress('de')
+      api.getProgress(lang)
     ]).then(([pl, pr]) => {
       setPlan(pl);
       setProgress(pr);
       // Fetch relocation info based on the plan's country
       return api.getRelocationInfo(pl.target_country);
-    }).then(setRelocation).catch(console.error);
+    }).then(setRelocation).catch(e => {
+      console.error(e);
+      setError("Could not load dashboard data. You may need to complete Onboarding first.");
+    });
   }, []);
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-32 space-y-4">
+        <div className="text-red-500 font-bold">{error}</div>
+        <a href="/onboarding" className="text-blue-600 underline">Go to Onboarding</a>
+      </div>
+    );
+  }
 
   if (!plan || !progress || !relocation) {
     return (

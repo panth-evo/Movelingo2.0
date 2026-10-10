@@ -27,10 +27,13 @@ export function ReadingView({ part, answers, onChange }: Props) {
         
         {/* PASSAGE */}
         {hasPassage && (
-          <div className="bg-amber-50/50 border border-amber-100 rounded-3xl p-6 sm:p-8 shadow-sm prose prose-slate max-w-none prose-p:leading-relaxed prose-p:text-slate-800 lg:sticky top-6">
-            {part.passage.map((p, i) => (
-              <p key={i} className="mb-4 last:mb-0 text-[1.05rem]">{p}</p>
-            ))}
+          <div className="bg-amber-50/50 border border-amber-100 rounded-3xl p-6 sm:p-8 shadow-sm prose prose-slate max-w-none prose-p:leading-relaxed prose-p:text-slate-800 lg:sticky top-6 break-words min-w-0 overflow-hidden">
+            {Array.isArray(part.passage) 
+              ? part.passage.map((p, i) => (
+                  <p key={i} className="mb-4 last:mb-0 text-[1.05rem]">{p}</p>
+                ))
+              : <p className="mb-4 last:mb-0 text-[1.05rem]">{part.passage}</p>
+            }
           </div>
         )}
 

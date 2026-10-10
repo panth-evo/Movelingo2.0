@@ -26,6 +26,7 @@ export function StepForms() {
       const lang = data.goal?.target_country ? countryMap[data.goal.target_country] : 'de';
       
       const finalData: ProfileInput = {
+        name: data.name || 'User',
         age: data.age ?? 30,
         nationality: data.nationality ?? 'Unknown',
         current_country: data.current_country ?? 'Unknown',
@@ -57,10 +58,21 @@ export function StepForms() {
           <div className="space-y-6 animate-in fade-in slide-in-from-right-4">
             <h2 className="text-2xl font-bold">Personal Details</h2>
             <div className="grid grid-cols-2 gap-4">
+              <label className="block text-sm font-medium">Name<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.name || ''} onChange={e => updateData({name: e.target.value})} required /></label>
               <label className="block text-sm font-medium">Age<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.age || ''} onChange={e => updateData({age: parseInt(e.target.value) || null})} required /></label>
               <label className="block text-sm font-medium">Nationality<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.nationality || ''} onChange={e => updateData({nationality: e.target.value})} required /></label>
               <label className="block text-sm font-medium">Current Country<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.current_country || ''} onChange={e => updateData({current_country: e.target.value})} required /></label>
               <label className="block text-sm font-medium">Passport Valid Until<input type="date" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.passport_valid_until || ''} onChange={e => updateData({passport_valid_until: e.target.value})} required /></label>
+              <label className="block text-sm font-medium">Marital Status
+                <select className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.marital_status || ''} onChange={e => updateData({marital_status: e.target.value})} required>
+                  <option value="">Select...</option>
+                  <option value="Single">Single</option>
+                  <option value="Married">Married</option>
+                  <option value="Divorced">Divorced</option>
+                  <option value="Widowed">Widowed</option>
+                </select>
+              </label>
+              <label className="block text-sm font-medium">Dependants<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.dependants || ''} onChange={e => updateData({dependants: parseInt(e.target.value) || 0})} required /></label>
             </div>
           </div>
         );
@@ -71,6 +83,9 @@ export function StepForms() {
             <div className="grid grid-cols-2 gap-4">
               <label className="block text-sm font-medium">Highest Degree<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.education?.highest || ''} onChange={e => updateData({education: { highest: e.target.value } as any})} required /></label>
               <label className="block text-sm font-medium">Field of Study<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.education?.field || ''} onChange={e => updateData({education: { field: e.target.value } as any})} required /></label>
+              <label className="block text-sm font-medium">University<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.education?.university || ''} onChange={e => updateData({education: { university: e.target.value } as any})} required /></label>
+              <label className="block text-sm font-medium">Graduation Year<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.education?.graduation_year || ''} onChange={e => updateData({education: { graduation_year: parseInt(e.target.value) || null } as any})} required /></label>
+              <label className="block text-sm font-medium">Grade<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.education?.grade || ''} onChange={e => updateData({education: { grade: e.target.value } as any})} required /></label>
             </div>
           </div>
         );
@@ -81,7 +96,9 @@ export function StepForms() {
             <div className="grid grid-cols-2 gap-4">
               <label className="block text-sm font-medium">Profession<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.work?.profession || ''} onChange={e => updateData({work: { profession: e.target.value } as any})} required /></label>
               <label className="block text-sm font-medium">Years Experience<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.work?.years_experience || ''} onChange={e => updateData({work: { years_experience: parseInt(e.target.value) || null } as any})} required /></label>
+              <label className="block text-sm font-medium">Salary Range<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.work?.salary_range || ''} onChange={e => updateData({work: { salary_range: e.target.value } as any})} required /></label>
               <label className="block flex items-center gap-2 mt-6"><input type="checkbox" checked={data.work?.job_offer || false} onChange={e => updateData({work: { job_offer: e.target.checked } as any})} /> I have a job offer</label>
+              <label className="block flex items-center gap-2 mt-6"><input type="checkbox" checked={data.work?.sponsor || false} onChange={e => updateData({work: { sponsor: e.target.checked } as any})} /> Needs Sponsorship</label>
             </div>
           </div>
         );
@@ -101,6 +118,7 @@ export function StepForms() {
                 </select>
               </label>
               <label className="block text-sm font-medium">Move Deadline<input type="date" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.goal?.move_deadline || ''} onChange={e => updateData({goal: { move_deadline: e.target.value } as any})} required /></label>
+              <label className="block text-sm font-medium">Target City<input type="text" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.goal?.target_city || ''} onChange={e => updateData({goal: { target_city: e.target.value } as any})} /></label>
             </div>
           </div>
         );
@@ -110,6 +128,7 @@ export function StepForms() {
             <h2 className="text-2xl font-bold">Finance</h2>
             <div className="grid grid-cols-2 gap-4">
               <label className="block text-sm font-medium">Savings (EUR)<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.finance?.savings_eur || ''} onChange={e => updateData({finance: { savings_eur: parseInt(e.target.value) || null } as any})} required /></label>
+              <label className="block text-sm font-medium">Monthly Budget (EUR)<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.finance?.monthly_budget_eur || ''} onChange={e => updateData({finance: { monthly_budget_eur: parseInt(e.target.value) || null } as any})} required /></label>
               <label className="block flex items-center gap-2 mt-6"><input type="checkbox" checked={data.finance?.open_to_loans || false} onChange={e => updateData({finance: { open_to_loans: e.target.checked } as any})} /> Open to loans</label>
             </div>
           </div>
@@ -130,6 +149,16 @@ export function StepForms() {
             <h2 className="text-2xl font-bold">Learning Style</h2>
             <div className="grid grid-cols-2 gap-4">
               <label className="block text-sm font-medium">Hours per day<input type="number" className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.study?.hours_per_day || 1} onChange={e => updateData({study: { hours_per_day: parseInt(e.target.value) || 1 } as any})} required /></label>
+              <label className="block text-sm font-medium">Study Style
+                <select className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.study?.style || 'visual'} onChange={e => updateData({study: { style: e.target.value } as any})}>
+                  <option value="visual">Visual</option><option value="audio">Audio</option><option value="reading">Reading</option><option value="practice">Practice</option>
+                </select>
+              </label>
+              <label className="block text-sm font-medium">Device
+                <select className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.study?.device || 'laptop'} onChange={e => updateData({study: { device: e.target.value } as any})}>
+                  <option value="laptop">Laptop</option><option value="mobile">Mobile</option><option value="tablet">Tablet</option>
+                </select>
+              </label>
               <label className="block text-sm font-medium">Weakest skill
                 <select className="mt-1 block w-full rounded-md border-slate-300 p-2 border" value={data.study?.weakest_skill || 'speaking'} onChange={e => updateData({study: { weakest_skill: e.target.value } as any})}>
                   <option value="speaking">Speaking</option><option value="listening">Listening</option><option value="writing">Writing</option><option value="reading">Reading</option>

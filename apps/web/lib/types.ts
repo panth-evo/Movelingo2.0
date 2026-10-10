@@ -3,6 +3,7 @@ export type Level = 'A1' | 'A2' | 'B1' | 'B2' | 'C1';
 export type Skill = 'reading' | 'listening' | 'writing' | 'speaking' | 'vocabulary' | 'grammar';
 
 export interface ProfileInput {
+  name?: string;
   age: number | null;
   nationality: string | null;
   current_country: string | null;

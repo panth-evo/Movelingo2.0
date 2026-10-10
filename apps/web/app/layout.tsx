@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
+import { Suspense } from 'react'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -36,7 +37,9 @@ export default function RootLayout({
         </header>
         
         <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-          {children}
+          <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
+            {children}
+          </Suspense>
         </main>
         
         <footer className="bg-slate-100 border-t border-slate-200 py-12 mt-auto">

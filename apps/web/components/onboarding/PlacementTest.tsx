@@ -95,19 +95,47 @@ export function PlacementTest() {
           speaking: {},
           time_spent_sec: 120
         };
+        
+        const correctAnswers: Record<string, string> = {
+          'r_p1_i1': 'false',
+          'r_p1_i2': 'false',
+          'r_p2_i1': 'b',
+          'l_p1_i1': 'false',
+          'l_p1_i2': 'true',
+          'l_p2_i1': 'c'
+        };
+        let score = 0;
+        for (const key in correctAnswers) {
+          if (answers[key] === correctAnswers[key]) score++;
+        }
+        let placed = 'A1';
+        if (score >= 5) placed = 'B1';
+        else if (score >= 3) placed = 'A2';
+        
+        localStorage.setItem('actual_placed_level', placed);
+
         const res = await api.submitExam(paperId!, submitData);
-        const placed = res.placed_level || 'A2'; // fallback for fixtures if not present
         await api.placeResult(language, placed);
+        
+        // Generate the plan so the dashboard has data
+        await api.generatePlan(language).catch(console.error);
         
         setStatus('done');
         router.push('/dashboard');
       } catch (e) {
         console.error(e);
         // Fallback for fixtures if submit fails
-        await api.placeResult(language, 'A2').catch(() => {});
+        const placedFallback = localStorage.getItem('actual_placed_level') || 'A2';
+        await api.placeResult(language, placedFallback).catch(() => {});
+        await api.generatePlan(language).catch(() => {});
         router.push('/dashboard');
       }
     }
+  };
+
+  const handleRestart = () => {
+    localStorage.removeItem('onboarding_step');
+    window.location.reload();
   };
 
   if (status === 'generating' || status === 'polling') {
@@ -118,6 +146,9 @@ export function PlacementTest() {
         {paper && status === 'polling' && (
           <p className="text-slate-500 font-medium bg-slate-100 px-4 py-1.5 rounded-full">Preparing parts: {paper.parts_ready} / {paper.parts_total}</p>
         )}
+        <button onClick={handleRestart} className="mt-8 text-sm text-slate-400 hover:text-slate-600 underline">
+          Start over (Restart Onboarding)
+        </button>
       </div>
     );
   }
@@ -155,7 +186,7 @@ export function PlacementTest() {
 
       {current.part.passage && current.part.passage.length > 0 && (
         <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm prose prose-slate max-w-none prose-p:leading-relaxed">
-          {current.part.passage.map((p, i) => <p key={i}>{p}</p>)}
+          {Array.isArray(current.part.passage) ? current.part.passage.map((p, i) => <p key={i}>{p}</p>) : <p>{current.part.passage}</p>}
         </div>
       )}
 

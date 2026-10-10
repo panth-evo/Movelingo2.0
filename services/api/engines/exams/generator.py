@@ -179,7 +179,8 @@ def _build_mock_part(part: dict, skill: str) -> dict:
             segments.append({
                 "segment_id": f"seg_{s}",
                 "script": [
-                    {"speaker": "Speaker 1", "text": "Mock audio text.", "voice_hint": "male_1"}
+                    {"speaker": "Interviewer", "text": "Welcome. Could you please introduce yourself and tell us why you are learning this language?", "voice_hint": "male_1"},
+                    {"speaker": "Candidate", "text": "Hello, thank you for having me. I am learning the language because I plan to relocate for my career.", "voice_hint": "female_1"}
                 ]
             })
             
@@ -188,13 +189,13 @@ def _build_mock_part(part: dict, skill: str) -> dict:
             for j in range(options_count or 2):
                 options.append({
                     "key": chr(65 + j) if item_type != "true_false" else ("True" if j==0 else "False"),
-                    "text": f"Option {j}",
+                    "text": f"Sample response {chr(65 + j)} for this listening question." if item_type != "true_false" else ("Yes, it is true." if j==0 else "No, it is false."),
                     "is_correct": j == 0
                 })
             
             items.append({
                 "type": item_type,
-                "prompt": f"Mock question {i+1}?",
+                "prompt": f"Based on the audio segment, what did the speaker indicate about topic {i+1}?",
                 "segment_id": f"seg_{i % segments_count}",
                 "options": options
             })
@@ -205,20 +206,25 @@ def _build_mock_part(part: dict, skill: str) -> dict:
         }
     else:
         passage_length = part.get("text", {}).get("words_min", 100)
-        passage = " ".join(["mock_word"] * passage_length)
+        lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+        lorem_words = lorem.split()
+        passage_words = []
+        while len(passage_words) < passage_length:
+            passage_words.extend(lorem_words)
+        passage = " ".join(passage_words[:passage_length])
         
         for i in range(item_count):
             options = []
             for j in range(options_count or 2):
                 options.append({
                     "key": chr(65 + j) if item_type != "true_false" else ("True" if j==0 else "False"),
-                    "text": f"Option {j}",
+                    "text": f"This is placeholder option {chr(65 + j)}." if item_type != "true_false" else ("True" if j==0 else "False"),
                     "is_correct": j == 0
                 })
             
             items.append({
                 "type": item_type,
-                "prompt": f"Mock question {i+1}?",
+                "prompt": f"According to the passage, which of the following is true regarding aspect {i+1}?",
                 "options": options
             })
             

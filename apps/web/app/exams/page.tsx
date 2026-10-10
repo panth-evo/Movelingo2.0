@@ -11,6 +11,7 @@ export default function ExamsPickerPage() {
   const router = useRouter();
   const [specs, setSpecs] = useState<SpecSummary[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
   const [generatingSpec, setGeneratingSpec] = useState<string | null>(null);
   const [paperId, setPaperId] = useState<string | null>(null);
@@ -22,7 +23,11 @@ export default function ExamsPickerPage() {
     api.getSpecs(language).then(res => {
       setSpecs(res);
       setLoading(false);
-    }).catch(console.error);
+    }).catch(e => {
+      console.error(e);
+      setError("Could not load exams.");
+      setLoading(false);
+    });
   }, [language]);
 
   useEffect(() => {
@@ -57,6 +62,10 @@ export default function ExamsPickerPage() {
 
   if (loading) {
     return <div className="p-12 text-center text-slate-500 animate-pulse">Loading exams...</div>;
+  }
+
+  if (error) {
+    return <div className="p-12 text-center text-red-500 font-bold">{error}</div>;
   }
 
   return (

@@ -1,94 +1,96 @@
 "use client";
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Globe, BookOpen, PlaneTakeoff } from 'lucide-react';
-import { api } from '@/lib/api';
-import { ProgressResponse } from '@/lib/types';
-import { LevelLadderPreview } from '@/components/progress/LevelLadderPreview';
+import { Plane, MapPin, Target, Sparkles } from 'lucide-react';
 
 export default function LandingPage() {
-  const [progressData, setProgressData] = useState<ProgressResponse | null>(null);
-
-  useEffect(() => {
-    api.getProgress('de').then(setProgressData).catch(console.error);
-  }, []);
+  const countries = [
+    { code: 'DE', name: 'German', target: 'Germany', flag: '🇩🇪', color: 'text-amber-500' },
+    { code: 'ES', name: 'Spanish', target: 'Spain', flag: '🇪🇸', color: 'text-orange-500' },
+    { code: 'FR', name: 'French', target: 'France', flag: '🇫🇷', color: 'text-blue-500' },
+    { code: 'IT', name: 'Italian', target: 'Italy', flag: '🇮🇹', color: 'text-green-500' },
+  ];
 
   return (
-    <div className="space-y-24 pb-12 animate-in fade-in duration-700">
-      {/* Hero Section */}
-      <section className="text-center space-y-6 pt-12">
-        <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 sm:text-6xl max-w-4xl mx-auto leading-tight">
-          Plan your move, learn the language you <span className="text-blue-600">actually need</span>.
-        </h1>
-        <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          MoveLingo connects your relocation timeline to a personalized language learning engine. Stop playing games and start preparing for reality.
-        </p>
-        <div className="pt-6">
-          <Link href="/onboarding" className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white transition-all bg-blue-600 rounded-lg hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5">
-            Start your plan <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="bg-white rounded-3xl p-10 shadow-sm border border-slate-200">
-        <h2 className="text-3xl font-bold text-center mb-12 text-slate-900">How it works</h2>
-        <div className="grid md:grid-cols-3 gap-10">
-          <div className="text-center space-y-4">
-            <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto"><Globe size={28} /></div>
-            <h3 className="text-xl font-semibold text-slate-900">1. Pick your route</h3>
-            <p className="text-slate-600 leading-relaxed">Tell us where you want to go. We check the exact visa requirements and the CEFR language level you need to succeed.</p>
-          </div>
-          <div className="text-center space-y-4">
-            <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto"><BookOpen size={28} /></div>
-            <h3 className="text-xl font-semibold text-slate-900">2. Learn with purpose</h3>
-            <p className="text-slate-600 leading-relaxed">Our AI engine builds a curriculum tailored entirely to your timeline and the specific topics you need to survive abroad.</p>
-          </div>
-          <div className="text-center space-y-4">
-            <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto"><PlaneTakeoff size={28} /></div>
-            <h3 className="text-xl font-semibold text-slate-900">3. Move with confidence</h3>
-            <p className="text-slate-600 leading-relaxed">Manage your documents, track your budget accurately, and ace your official language exams all in one unified place.</p>
-          </div>
-        </div>
-      </section>
-
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        {/* Countries */}
-        <section className="space-y-8">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-slate-900">Four countries.</h2>
-            <h2 className="text-3xl font-bold text-slate-400">Four official exams.</h2>
-          </div>
-          <p className="text-lg text-slate-600">We train you exclusively using the formats of the tests recognized by immigration authorities.</p>
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { code: 'DE', name: 'Germany', exam: 'Goethe-Zertifikat' },
-              { code: 'ES', name: 'Spain', exam: 'DELE' },
-              { code: 'FR', name: 'France', exam: 'DELF' },
-              { code: 'IT', name: 'Italy', exam: 'CILS' },
-            ].map((c) => (
-              <div key={c.code} className="p-6 bg-white rounded-xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group">
-                <div className="text-2xl font-bold mb-2 text-slate-900 group-hover:text-blue-600 transition-colors">{c.code} <span className="font-medium text-slate-400 text-lg">{c.name}</span></div>
-                <div className="text-sm text-slate-500 font-medium">Target Exam: <span className="text-slate-700">{c.exam}</span></div>
+    <div className="flex flex-col items-center w-full pb-20 animate-in fade-in duration-700">
+      
+      {/* Hero Section (Duolingo Style Split) */}
+      <section className="min-h-[75vh] w-full flex items-center justify-center px-4 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
+          {/* Left: Mascot/Graphic */}
+          <div className="flex justify-center order-2 md:order-1">
+            <div className="relative w-72 h-72 md:w-96 md:h-96 bg-[#ddf4ff] rounded-full flex items-center justify-center shadow-[0_0_80px_-15px_rgba(28,176,246,0.4)] animate-bounce" style={{ animationDuration: '3s' }}>
+              <Plane className="w-40 h-40 md:w-56 md:h-56 text-[#1cb0f6]" strokeWidth={1.5} />
+              <div className="absolute top-4 right-0 md:-right-8 bg-white px-6 py-4 rounded-2xl rounded-bl-none shadow-xl border-2 border-slate-200 font-extrabold text-slate-700 text-lg animate-pulse" style={{ animationDuration: '2.5s' }}>
+                Move fast. Learn right.
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Progress Preview */}
-        <section className="bg-slate-100 p-8 rounded-3xl border border-slate-200">
-          <h2 className="text-2xl font-bold mb-2 text-slate-900">Track real progress</h2>
-          <p className="text-slate-500 mb-6 text-sm">Levels fill based on mock exam scores, not arbitrary points.</p>
-          {progressData ? (
-            <LevelLadderPreview data={progressData} />
-          ) : (
-            <div className="animate-pulse flex flex-col gap-3">
-              {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-[76px] bg-slate-200/60 rounded-lg"></div>)}
             </div>
-          )}
-        </section>
-      </div>
+          </div>
+
+          {/* Right: Copy & CTA */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-8 order-1 md:order-2">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#4b4b4b] tracking-tight leading-tight">
+              The free, fun, and effective way to <span className="text-[#1cb0f6]">move abroad!</span>
+            </h1>
+            
+            <div className="w-full flex flex-col gap-4 sm:w-80">
+              <Link href="#start" className="w-full text-center uppercase tracking-widest font-extrabold text-white bg-[#58cc02] hover:bg-[#46a302] border-b-4 border-[#58a700] hover:border-[#46a302] active:border-b-0 active:translate-y-1 rounded-2xl py-4 text-sm transition-all shadow-sm">
+                Get Started
+              </Link>
+              <Link href="/dashboard" className="w-full text-center uppercase tracking-widest font-extrabold text-[#1cb0f6] bg-white border-2 border-[#e5e5e5] hover:bg-slate-50 border-b-4 hover:border-b-4 active:border-b-0 active:translate-y-1 rounded-2xl py-4 text-sm transition-all shadow-sm">
+                I already have an account
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Language / Country Selection */}
+      <section id="start" className="w-full max-w-5xl mx-auto mt-20 pt-16 border-t-2 border-[#e5e5e5] px-4 space-y-10 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[#4b4b4b]">Where do you want to move?</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {countries.map((c) => (
+            <Link 
+              key={c.code} 
+              href={`/onboarding?country=${c.code}`} 
+              className="flex flex-col items-center justify-center p-6 bg-white border-2 border-[#e5e5e5] rounded-2xl border-b-4 active:border-b-0 active:translate-y-1 hover:bg-slate-50 transition-all cursor-pointer group"
+            >
+              <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm">{c.flag}</div>
+              <h3 className="text-xl font-bold text-[#4b4b4b]">{c.target}</h3>
+              <p className={`font-extrabold uppercase tracking-widest text-xs mt-2 ${c.color}`}>{c.name}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* How it works features */}
+      <section className="w-full max-w-5xl mx-auto mt-32 px-4 space-y-16">
+        <div className="grid md:grid-cols-3 gap-12">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-20 h-20 bg-[#ce82ff] text-white rounded-3xl flex items-center justify-center rotate-3 border-b-4 border-[#b063e6] shadow-sm">
+              <MapPin size={40} strokeWidth={2.5} />
+            </div>
+            <h3 className="text-2xl font-extrabold text-[#4b4b4b]">1. Pick your route</h3>
+            <p className="text-[#777777] font-medium text-lg leading-relaxed">Select your target country. We check exact visa requirements and the CEFR language level you need.</p>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-20 h-20 bg-[#ffc800] text-white rounded-3xl flex items-center justify-center -rotate-3 border-b-4 border-[#e5b400] shadow-sm">
+              <Sparkles size={40} strokeWidth={2.5} />
+            </div>
+            <h3 className="text-2xl font-extrabold text-[#4b4b4b]">2. Learn with purpose</h3>
+            <p className="text-[#777777] font-medium text-lg leading-relaxed">Our AI builds a curriculum tailored entirely to your timeline and the specific topics you need to survive.</p>
+          </div>
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-20 h-20 bg-[#ff4b4b] text-white rounded-3xl flex items-center justify-center rotate-3 border-b-4 border-[#e53a3a] shadow-sm">
+              <Target size={40} strokeWidth={2.5} />
+            </div>
+            <h3 className="text-2xl font-extrabold text-[#4b4b4b]">3. Move with confidence</h3>
+            <p className="text-[#777777] font-medium text-lg leading-relaxed">Manage documents, track your budget, and ace official language exams all in one place.</p>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
+
