@@ -1,6 +1,7 @@
 import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
-  SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData
+  SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData,
+  ReviewItem, TeachBackSession
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -100,6 +101,24 @@ export const api = {
         { rule: 'in Höhe von + Dative', explanation: 'Used in formal contexts to specify an amount of money or measurement.', examples: ['Eine Kaution in Höhe von 1500 Euro.'] },
         { rule: 'vor + Dative', explanation: 'Preposition of time meaning "before". Requires the dative case.', examples: ['Vor der Übergabe (die -> der).'] }
       ]
+    }), 500));
+  },
+  getReviewQueue: (): Promise<ReviewItem[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([
+      { item_id: 'r1', type: 'flashcard', prompt: 'die Kaution', answer: 'security deposit', context: 'zahlt eine Kaution' },
+      { item_id: 'r2', type: 'cloze', prompt: 'Der Mieter zahlt eine Kaution ___ Höhe von 3 Monatsmieten.', answer: 'in', context: 'in Höhe von + Dative' },
+      { item_id: 'r3', type: 'dictation', prompt: 'Die Kaltmiete beträgt 800 Euro.', answer: 'Die Kaltmiete beträgt 800 Euro.', context: 'Type what you hear' }
+    ]), 600));
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  submitReview: (itemId: string, grade: number): Promise<{ ok: boolean }> => {
+    return new Promise(resolve => setTimeout(() => resolve({ ok: true }), 200));
+  },
+  startTeachBack: (conceptId: string): Promise<TeachBackSession> => {
+    return new Promise(resolve => setTimeout(() => resolve({
+      session_id: 'tb_123',
+      concept: conceptId.replace(/_/g, ' '),
+      instructions: `Explain to the AI how to use this concept. Give a real-world example related to relocating or renting.`
     }), 500));
   },
 };

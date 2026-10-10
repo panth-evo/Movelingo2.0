@@ -283,3 +283,17 @@ export interface LessonData {
     examples: string[];
   }>;
 }
+
+export interface ReviewItem {
+  item_id: string;
+  type: 'flashcard' | 'cloze' | 'dictation';
+  prompt: string;
+  answer: string;
+  context?: string;
+}
+
+export interface TeachBackSession {
+  session_id: string;
+  concept: string;
+  instructions: string;
+}
