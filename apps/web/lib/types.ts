@@ -306,3 +306,18 @@ export interface SkillNode {
   mastery_percentage: number;
   dependencies: string[];
 }
+
+export interface TimelineEvent {
+  id: string;
+  title: string;
+  date: string;
+  type: 'language' | 'relocation' | 'admin';
+  status: 'completed' | 'current' | 'upcoming';
+}
+
+export interface EligibilityScore {
+  route_name: string;
+  score_percentage: number;
+  eligible: boolean;
+  missing_requirements: string[];
+}

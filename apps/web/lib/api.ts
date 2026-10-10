@@ -1,7 +1,7 @@
 import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
   SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData,
-  ReviewItem, TeachBackSession, SkillNode
+  ReviewItem, TeachBackSession, SkillNode, TimelineEvent, EligibilityScore
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -129,5 +129,25 @@ export const api = {
       { id: 'n4', title: 'Healthcare & Medicine', description: 'Doctor appointments, symptoms, and insurance terms.', status: 'locked', mastery_percentage: 0, dependencies: ['n2', 'n3'] },
       { id: 'n5', title: 'Workplace Communication', description: 'Professional emails, meetings, and interviews.', status: 'locked', mastery_percentage: 0, dependencies: ['n3'] }
     ]), 600));
+  },
+  
+  // Phase 3 Mocks
+  getTimeline: (): Promise<TimelineEvent[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([
+      { id: 't1', title: 'Start A1 Course', date: '2024-01-15', type: 'language', status: 'completed' },
+      { id: 't2', title: 'Book Goethe B1 Exam', date: '2024-05-01', type: 'admin', status: 'current' },
+      { id: 't3', title: 'Pass B1 Exam', date: '2024-06-15', type: 'language', status: 'upcoming' },
+      { id: 't4', title: 'Submit Visa Application', date: '2024-07-01', type: 'relocation', status: 'upcoming' },
+      { id: 't5', title: 'Move to Germany', date: '2024-09-01', type: 'relocation', status: 'upcoming' }
+    ]), 400));
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  checkEligibility: (answers: Record<string, string>): Promise<EligibilityScore> => {
+    return new Promise(resolve => setTimeout(() => resolve({
+      route_name: 'EU Blue Card (Germany)',
+      score_percentage: answers.degree === 'yes' ? 85 : 30,
+      eligible: answers.degree === 'yes' && answers.salary === 'high',
+      missing_requirements: answers.degree === 'no' ? ['Recognized University Degree'] : (answers.salary !== 'high' ? ['Minimum Salary Threshold'] : [])
+    }), 800));
   },
 };
