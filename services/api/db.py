@@ -1,17 +1,25 @@
 """Database setup for MoveLingo (CONTRACT.md section 2). Owned by Person B."""
+import os
 from pathlib import Path
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 API_DIR = Path(__file__).resolve().parent
-# Always services/api/movelingo.db, regardless of the working directory.
-DB_PATH = API_DIR / "movelingo.db"
 
-engine = create_engine(
-    f"sqlite:///{DB_PATH.as_posix()}",
-    connect_args={"check_same_thread": False},
-)
+# Support PostgreSQL via DATABASE_URL, fallback to SQLite for local/tests
+DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{API_DIR.as_posix()}/movelingo.db")
+
+if DATABASE_URL.startswith("sqlite"):
+    engine = create_engine(
+        DATABASE_URL,
+        connect_args={"check_same_thread": False},
+    )
+else:
+    engine = create_engine(
+        DATABASE_URL,
+        pool_pre_ping=True,
+    )
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 

@@ -177,3 +177,67 @@ class RelocationInfo(Strict):
     checklist: list[ChecklistItem]
     cities: list[RelocationCity]
     sources: list[RelocationSource]
+
+# --- PlanResult (section 6) ---
+
+class WeeklyPlan(Strict):
+    week: int
+    focus: str
+    hours: float
+    skill_focus: ExamSkill
+
+class BudgetItem(Strict):
+    label: str
+    amount: float | None
+    source_url: str | None = None
+
+class PlanBudget(Strict):
+    currency: Literal["EUR"] = "EUR"
+    one_time: list[BudgetItem]
+    monthly: list[BudgetItem]
+    savings_gap: float | None
+
+class PlanMilestone(Strict):
+    id: str
+    label: str
+    due_date: str | None  # YYYY-MM-DD
+
+class PlanResult(Strict):
+    target_country: TargetCountry
+    language: Language
+    recommended_route: str
+    required_level: Level
+    current_level: Level
+    weeks_to_target: int
+    days_to_deadline: int
+    on_track: bool
+    weekly_plan: list[WeeklyPlan]
+    budget: PlanBudget
+    document_checklist: list[ChecklistItem]
+    cities: list[RelocationCity]
+    milestones: list[PlanMilestone]
+    risks: list[str]
+    sources: list[RelocationSource]
+    disclaimer: str
+
+# --- documents (section 5 & B4) ---
+
+class DocumentCreate(Strict):
+    label: str
+    needs_translation: bool
+    needs_apostille: bool
+    expires_on: str | None = None  # YYYY-MM-DD
+
+class DocumentUpdate(Strict):
+    status: Literal["todo", "uploaded", "done"] | None = None
+    expires_on: str | None = None
+
+class DocumentResponse(Strict):
+    id: str
+    label: str
+    status: Literal["todo", "uploaded", "done"]
+    expires_on: str | None
+    needs_translation: bool
+    needs_apostille: bool
+    flags: list[str]
+

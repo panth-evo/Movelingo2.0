@@ -118,3 +118,25 @@ def test_f_uncertain_cap_at_99(session):
     skill = compute_progress(session, USER, "de").levels[0].skills.reading
     assert skill.certified is False
     assert skill.progress == 99  # practice 1.0 + exam_best 1.0 still capped
+
+def test_c_submit_graded_section(session):
+    # Simulates Person C calling record_progress_event from POST /api/exams/papers/{id}/submit
+    # Writing task: attempted = 6, correct = 6 * ratio, passed=True
+    record_progress_event(
+        db=session,
+        user_id=USER,
+        language="de",
+        level="B1",
+        skill="writing",
+        source="exam",
+        attempted=6.0,
+        correct=4.5,  # ratio 0.75
+        section_ratio=0.75,
+        passed=True
+    )
+    
+    resp = compute_progress(session, USER, "de")
+    b1_card = next(c for c in resp.levels if c.level == "B1")
+    writing_skill = b1_card.skills.writing
+    assert writing_skill.certified is True
+    assert writing_skill.progress == 100
