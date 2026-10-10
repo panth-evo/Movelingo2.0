@@ -265,3 +265,21 @@ export interface SectionResult {
   placed_level?: string;
   progress: ProgressResponse;
 }
+
+export interface LessonData {
+  lesson_id: string;
+  topic: string;
+  cefr_level: string;
+  original_text?: string;
+  summary: string;
+  vocabulary: Array<{
+    word: string;
+    translation: string;
+    context: string;
+  }>;
+  grammar: Array<{
+    rule: string;
+    explanation: string;
+    examples: string[];
+  }>;
+}

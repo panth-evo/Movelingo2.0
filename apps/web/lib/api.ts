@@ -1,6 +1,6 @@
 import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
-  SpecSummary, ExamPaper, SubmitInput, SectionResult, Language
+  SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -78,4 +78,28 @@ export const api = {
   submitExam: (paperId: string, data: SubmitInput): Promise<SectionResult> => fetchApi(`/api/exams/papers/${paperId}/submit`, { method: 'POST', body: JSON.stringify(data) }),
   getResults: (language: Language): Promise<SectionResult[]> => fetchApi(`/api/exams/results?language=${language}`),
   partnerTurn: (data: { paper_id: string, part_id: string, history: Array<{role: string, text: string}> }) => fetchApi('/api/speech/partner-turn', { method: 'POST', body: JSON.stringify(data) }),
+  
+  // Phase 2 Mocks
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  uploadCapture: (data: FormData): Promise<{ lesson_id: string }> => {
+    return new Promise(resolve => setTimeout(() => resolve({ lesson_id: 'lesson_mock_123' }), 2000));
+  },
+  getLesson: (id: string): Promise<LessonData> => {
+    return new Promise(resolve => setTimeout(() => resolve({
+      lesson_id: id,
+      topic: 'Rental Contract (Mietvertrag)',
+      cefr_level: 'B1',
+      original_text: 'Der Mieter zahlt eine Kaution in Höhe von 3 Monatskaltmieten vor der Übergabe der Wohnung.',
+      summary: 'Understanding standard clauses and financial obligations in a German rental agreement.',
+      vocabulary: [
+        { word: 'die Kaution', translation: 'security deposit', context: 'zahlt eine Kaution' },
+        { word: 'die Kaltmiete', translation: 'basic rent (excluding heating/utilities)', context: '3 Monatskaltmieten' },
+        { word: 'die Übergabe', translation: 'handover / transfer', context: 'vor der Übergabe der Wohnung' }
+      ],
+      grammar: [
+        { rule: 'in Höhe von + Dative', explanation: 'Used in formal contexts to specify an amount of money or measurement.', examples: ['Eine Kaution in Höhe von 1500 Euro.'] },
+        { rule: 'vor + Dative', explanation: 'Preposition of time meaning "before". Requires the dative case.', examples: ['Vor der Übergabe (die -> der).'] }
+      ]
+    }), 500));
+  },
 };
