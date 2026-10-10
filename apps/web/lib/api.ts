@@ -74,18 +74,41 @@ const fetchFixture = async (path: string, options: RequestInit) => {
       
       let raw = 0;
       let max = 0;
+      const per_part: Record<string, { raw: number, max: number }> = {};
       
       for (const key in correctAnswers) {
         if (key.startsWith(skill.charAt(0))) {
+          const part_id = key.split('_').slice(0, 2).join('_');
+          if (!per_part[part_id]) per_part[part_id] = { raw: 0, max: 0 };
+          
+          per_part[part_id].max++;
           max++;
+          
           if (answers[key] === correctAnswers[key]) {
+            per_part[part_id].raw++;
             raw++;
           }
         }
       }
       
+      const perPartArray = Object.keys(per_part).map(pid => ({
+         part_id: pid,
+         raw: per_part[pid].raw,
+         max: per_part[pid].max
+      }));
+      
       if (skill === 'writing' || skill === 'speaking') {
-         raw = 100; max = 100;
+         const p1Key = skill.charAt(0) + '_p1';
+         const p2Key = skill.charAt(0) + '_p2';
+         
+         const sourceMap = skill === 'writing' ? (body.texts || {}) : (body.speaking || {});
+         const p1Score = (sourceMap[p1Key] || '').trim().length > 0 ? 50 : 0;
+         const p2Score = (sourceMap[p2Key] || '').trim().length > 0 ? 50 : 0;
+         
+         raw = p1Score + p2Score;
+         max = 100;
+         perPartArray.push({ part_id: p1Key, raw: p1Score, max: 50 });
+         perPartArray.push({ part_id: p2Key, raw: p2Score, max: 50 });
       } else if (max === 0) {
          raw = 0; max = 30;
       }
@@ -94,7 +117,7 @@ const fetchFixture = async (path: string, options: RequestInit) => {
       const scaled_100 = Math.round(ratio * 100);
       const passed = ratio >= 0.6;
       
-      return {
+      const result = {
         ...fixture,
         skill: skill,
         raw,
@@ -102,10 +125,27 @@ const fetchFixture = async (path: string, options: RequestInit) => {
         ratio,
         scaled_100,
         passed,
+        per_part: perPartArray.length > 0 ? perPartArray : fixture.per_part,
         summary: passed ? `Great job! You passed the ${skill} section.` : `Keep practicing! You didn't pass the ${skill} section this time.`,
       };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('last_exam_skill', skill);
+        localStorage.setItem(`last_exam_result_${skill}`, JSON.stringify(result));
+      }
+      return result;
     }
-    if (path.startsWith('/api/exams/results')) return [(await import('../fixtures/section_result_reading.json')).default];
+    if (path.startsWith('/api/exams/results')) {
+      if (typeof window !== 'undefined') {
+        const lastSkill = localStorage.getItem('last_exam_skill');
+        if (lastSkill) {
+          const savedStr = localStorage.getItem(`last_exam_result_${lastSkill}`);
+          if (savedStr) {
+            try { return [JSON.parse(savedStr)]; } catch(e) {}
+          }
+        }
+      }
+      return [(await import('../fixtures/section_result_reading.json')).default];
+    }
     
     return {};
   } catch {

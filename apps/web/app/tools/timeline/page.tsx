@@ -7,10 +7,24 @@ import { CalendarDays, CheckCircle2, Circle, Clock, Plane, BookOpen, Briefcase }
 
 export default function TimelinePage() {
   const [events, setEvents] = useState<TimelineEvent[]>([]);
+  const [toggled, setToggled] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
+    const saved = localStorage.getItem('timeline_toggled');
+    if (saved) {
+      try { setToggled(JSON.parse(saved)); } catch (e) {}
+    }
     api.getTimeline().then(setEvents).catch(console.error);
   }, []);
+
+  const handleToggle = (id: string, originalStatus: string) => {
+    setToggled(prev => {
+      const isCurrentlyCompleted = prev[id] ?? (originalStatus === 'completed');
+      const next = { ...prev, [id]: !isCurrentlyCompleted };
+      localStorage.setItem('timeline_toggled', JSON.stringify(next));
+      return next;
+    });
+  };
 
   if (events.length === 0) {
     return (
@@ -31,9 +45,9 @@ export default function TimelinePage() {
 
   const getStatusIcon = (status: string, color: string) => {
     switch (status) {
-      case 'completed': return <CheckCircle2 className={`w-8 h-8 ${color.split(' ')[0]}`} />;
-      case 'current': return <div className="relative flex h-8 w-8 items-center justify-center"><div className={`absolute inline-flex h-full w-full rounded-full opacity-30 animate-ping ${color.split(' ')[1]}`}></div><Clock className={`relative w-8 h-8 ${color.split(' ')[0]}`} /></div>;
-      default: return <Circle className={`w-8 h-8 text-slate-300`} />;
+      case 'completed': return <CheckCircle2 className={`w-8 h-8 ${color.split(' ')[0]} cursor-pointer hover:scale-110 transition-transform`} />;
+      case 'current': return <div className="relative flex h-8 w-8 items-center justify-center cursor-pointer hover:scale-110 transition-transform"><div className={`absolute inline-flex h-full w-full rounded-full opacity-30 animate-ping ${color.split(' ')[1]}`}></div><Clock className={`relative w-8 h-8 ${color.split(' ')[0]}`} /></div>;
+      default: return <Circle className={`w-8 h-8 text-slate-300 cursor-pointer hover:text-slate-400 transition-colors hover:scale-110`} />;
     }
   };
 
@@ -58,6 +72,9 @@ export default function TimelinePage() {
             const config = getTypeConfig(ev.type);
             const dateObj = new Date(ev.date);
             const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            
+            const isCompleted = toggled[ev.id] ?? (ev.status === 'completed');
+            const effectiveStatus = isCompleted ? 'completed' : (ev.status === 'current' ? 'current' : 'upcoming');
 
             return (
               <div key={ev.id} className="relative flex items-start group">
@@ -67,8 +84,11 @@ export default function TimelinePage() {
                 </div>
 
                 {/* Node Icon */}
-                <div className="absolute -left-4 sm:left-[-15px] bg-white p-1 rounded-full">
-                  {getStatusIcon(ev.status, config.color)}
+                <div 
+                  className="absolute -left-4 sm:left-[-15px] bg-white p-1 rounded-full z-20"
+                  onClick={() => handleToggle(ev.id, ev.status)}
+                >
+                  {getStatusIcon(effectiveStatus, config.color)}
                 </div>
 
                 {/* Event Card */}
@@ -76,7 +96,10 @@ export default function TimelinePage() {
                   {/* Date Label (Mobile) */}
                   <div className="sm:hidden text-xs font-black text-slate-400 uppercase tracking-widest mb-1">{formattedDate}</div>
                   
-                  <div className={`p-6 rounded-2xl border-2 transition-all shadow-sm ${ev.status === 'completed' ? 'bg-slate-50 border-slate-100 opacity-70' : ev.status === 'current' ? `bg-white ${config.border} shadow-md scale-[1.02]` : 'bg-white border-slate-200 hover:border-slate-300'}`}>
+                  <div 
+                    onClick={() => handleToggle(ev.id, ev.status)}
+                    className={`p-6 rounded-2xl border-2 transition-all shadow-sm cursor-pointer ${effectiveStatus === 'completed' ? 'bg-slate-50 border-slate-100 opacity-70' : effectiveStatus === 'current' ? `bg-white ${config.border} shadow-md scale-[1.02]` : 'bg-white border-slate-200 hover:border-slate-300'}`}
+                  >
                     <div className="flex items-center gap-3 mb-2">
                       <div className={`p-2 rounded-lg ${config.color}`}>
                         {config.icon}

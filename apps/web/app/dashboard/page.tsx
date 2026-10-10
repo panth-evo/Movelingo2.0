@@ -9,6 +9,7 @@ import { MovePlanPanel } from '@/components/dashboard/MovePlanPanel';
 import { BudgetPanel } from '@/components/dashboard/BudgetPanel';
 import { DocumentsPanel } from '@/components/dashboard/DocumentsPanel';
 import { DestinationPanel } from '@/components/dashboard/DestinationPanel';
+import { VisaGuidePanel } from '@/components/dashboard/VisaGuidePanel';
 
 export default function DashboardPage() {
   const [plan, setPlan] = useState<PlanResult | null>(null);
@@ -71,6 +72,8 @@ export default function DashboardPage() {
             <DocumentsPanel plan={plan} />
             <DestinationPanel info={relocation} />
           </div>
+
+          <VisaGuidePanel plan={plan} />
         </div>
         
         {/* Right Column (Secondary / Timelines) */}
