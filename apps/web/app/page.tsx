@@ -20,9 +20,9 @@ export default function LandingPage() {
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
           {/* Left: Mascot/Graphic */}
           <div className="flex justify-center order-2 md:order-1">
-            <div className="relative w-72 h-72 md:w-96 md:h-96 bg-[#ddf4ff] rounded-full flex items-center justify-center shadow-[0_0_80px_-15px_rgba(28,176,246,0.4)] animate-bounce" style={{ animationDuration: '3s' }}>
-              <Image src="/mascot.png?v=2" alt="Movelingo Mascot" width={300} height={300} className="w-56 h-56 md:w-72 md:h-72 object-contain translate-y-6 md:translate-y-8" style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }} priority />
-              <div className="absolute top-4 right-0 md:-right-8 bg-white px-6 py-4 rounded-2xl rounded-bl-none shadow-xl border-2 border-slate-200 font-extrabold text-slate-700 text-lg animate-pulse" style={{ animationDuration: '2.5s' }}>
+            <div className="relative w-72 h-72 md:w-96 md:h-96 bg-[#ddf4ff] rounded-full flex items-center justify-center shadow-[0_0_80px_-15px_rgba(28,176,246,0.4)] animate-bounce overflow-hidden" style={{ animationDuration: '3s' }}>
+              <Image src="/mascot.png?v=3" alt="Movelingo Mascot" width={300} height={300} className="w-56 h-56 md:w-72 md:h-72 object-contain translate-y-6 md:translate-y-8 mix-blend-darken scale-125" style={{ WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 70%)', maskImage: 'radial-gradient(circle at center, black 40%, transparent 70%)' }} priority />
+              <div className="absolute top-4 right-0 md:-right-8 bg-white px-6 py-4 rounded-2xl rounded-bl-none shadow-xl border-2 border-slate-200 font-extrabold text-slate-700 text-lg animate-pulse z-10" style={{ animationDuration: '2.5s' }}>
                 Move fast. Learn right.
               </div>
             </div>
