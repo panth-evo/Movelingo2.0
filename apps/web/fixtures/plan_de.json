@@ -1,0 +1,37 @@
+{
+  "target_country": "DE",
+  "language": "de",
+  "recommended_route": "EU Blue Card",
+  "required_level": "B1",
+  "current_level": "A1",
+  "weeks_to_target": 25,
+  "days_to_deadline": 270,
+  "on_track": true,
+  "weekly_plan": [
+    { "week": 1, "focus": "Basic greetings and numbers", "hours": 10, "skill_focus": "speaking" },
+    { "week": 2, "focus": "Daily routines and time", "hours": 10, "skill_focus": "listening" }
+  ],
+  "budget": {
+    "currency": "EUR",
+    "one_time": [
+      { "label": "Visa Application Fee", "amount": 75, "source_url": "https://example.com" }
+    ],
+    "monthly": [
+      { "label": "Rent estimate", "amount": 900 }
+    ],
+    "savings_gap": 2500
+  },
+  "document_checklist": [
+    { "id": "doc_1", "label": "Passport", "needs_translation": false, "needs_apostille": false },
+    { "id": "doc_2", "label": "University Degree", "needs_translation": true, "needs_apostille": true }
+  ],
+  "milestones": [
+    { "id": "ms_1", "label": "Book B1 Exam", "due_date": "2027-04-01" },
+    { "id": "ms_2", "label": "Visa Appointment", "due_date": "2027-05-15" }
+  ],
+  "risks": ["Degree recognition can take up to 3 months."],
+  "sources": [
+    { "label": "Make it in Germany", "url": "https://www.make-it-in-germany.com", "last_verified": "2026-10-10" }
+  ],
+  "disclaimer": "Not legal advice. Check the official site."
+}

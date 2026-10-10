@@ -1,0 +1,30 @@
+[
+  {
+    "spec_id": "goethe_a1",
+    "exam_name": "Goethe-Zertifikat A1",
+    "language": "de",
+    "cefr": "A1",
+    "derived": false,
+    "verified_on": "2026-10-10",
+    "sections": [
+      { "skill": "reading", "duration_min": 25, "parts": 3 },
+      { "skill": "listening", "duration_min": 20, "parts": 3 },
+      { "skill": "writing", "duration_min": 20, "parts": 2 },
+      { "skill": "speaking", "duration_min": 15, "parts": 3 }
+    ]
+  },
+  {
+    "spec_id": "goethe_b1",
+    "exam_name": "Goethe-Zertifikat B1",
+    "language": "de",
+    "cefr": "B1",
+    "derived": false,
+    "verified_on": "2026-10-10",
+    "sections": [
+      { "skill": "reading", "duration_min": 65, "parts": 5 },
+      { "skill": "listening", "duration_min": 40, "parts": 4 },
+      { "skill": "writing", "duration_min": 60, "parts": 3 },
+      { "skill": "speaking", "duration_min": 15, "parts": 3 }
+    ]
+  }
+]

@@ -1,0 +1,94 @@
+{
+  "paper_id": "goethe_b1_mock_123",
+  "skill": "reading",
+  "level": "B1",
+  "raw": 24,
+  "max": 30,
+  "ratio": 0.8,
+  "scaled_100": 80,
+  "passed": true,
+  "pass_ratio": 0.6,
+  "per_part": [
+    { "part_id": "r_p1", "raw": 5, "max": 6 },
+    { "part_id": "r_p2", "raw": 5, "max": 6 },
+    { "part_id": "r_p3", "raw": 5, "max": 7 },
+    { "part_id": "r_p4", "raw": 6, "max": 7 },
+    { "part_id": "r_p5", "raw": 3, "max": 4 }
+  ],
+  "criteria": [],
+  "summary": "Great job! You passed the reading section.",
+  "ai_estimated": false,
+  "progress": {
+    "language": "de",
+    "current_level": "A2",
+    "target_level": "B1",
+    "updated_at": "2026-10-10T12:00:00Z",
+    "levels": [
+      {
+        "level": "A1",
+        "status": "certified",
+        "progress": 100,
+        "skills": {
+          "reading": { "progress": 100, "certified": true },
+          "listening": { "progress": 100, "certified": true },
+          "writing": { "progress": 100, "certified": true },
+          "speaking": { "progress": 100, "certified": true },
+          "vocabulary": { "progress": 100, "certified": true },
+          "grammar": { "progress": 100, "certified": true }
+        }
+      },
+      {
+        "level": "A2",
+        "status": "in_progress",
+        "progress": 68,
+        "skills": {
+          "reading": { "progress": 92, "certified": true },
+          "listening": { "progress": 40, "certified": false },
+          "writing": { "progress": 60, "certified": false },
+          "speaking": { "progress": 68, "certified": false },
+          "vocabulary": { "progress": 55, "certified": false },
+          "grammar": { "progress": 70, "certified": false }
+        }
+      },
+      {
+        "level": "B1",
+        "status": "locked",
+        "progress": 0,
+        "skills": {
+          "reading": { "progress": 80, "certified": true },
+          "listening": { "progress": 0, "certified": false },
+          "writing": { "progress": 0, "certified": false },
+          "speaking": { "progress": 0, "certified": false },
+          "vocabulary": { "progress": 0, "certified": false },
+          "grammar": { "progress": 0, "certified": false }
+        }
+      },
+      {
+        "level": "B2",
+        "status": "locked",
+        "progress": 0,
+        "skills": {
+          "reading": { "progress": 0, "certified": false },
+          "listening": { "progress": 0, "certified": false },
+          "writing": { "progress": 0, "certified": false },
+          "speaking": { "progress": 0, "certified": false },
+          "vocabulary": { "progress": 0, "certified": false },
+          "grammar": { "progress": 0, "certified": false }
+        }
+      },
+      {
+        "level": "C1",
+        "status": "locked",
+        "progress": 0,
+        "skills": {
+          "reading": { "progress": 0, "certified": false },
+          "listening": { "progress": 0, "certified": false },
+          "writing": { "progress": 0, "certified": false },
+          "speaking": { "progress": 0, "certified": false },
+          "vocabulary": { "progress": 0, "certified": false },
+          "grammar": { "progress": 0, "certified": false }
+        }
+      }
+    ]
+  }
+}
