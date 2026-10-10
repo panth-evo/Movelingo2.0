@@ -1,0 +1,50 @@
+{
+  "country": "Germany",
+  "routes": [
+    {
+      "id": "eu_blue_card",
+      "name": "EU Blue Card",
+      "purpose": "work",
+      "required_language_level": null,
+      "summary": "For highly skilled workers with a university degree and a job offer meeting the salary threshold.",
+      "eligibility": [
+        "University degree recognized in Germany",
+        "Job offer with minimum salary requirement"
+      ],
+      "fees": [
+        { "label": "Visa Fee", "amount": 75, "currency": "EUR", "source_url": "https://example.com" }
+      ],
+      "official_url": "https://www.make-it-in-germany.com",
+      "last_verified": "2026-10-10",
+      "verified": true
+    },
+    {
+      "id": "opportunity_card",
+      "name": "Opportunity Card",
+      "purpose": "work",
+      "required_language_level": "A1",
+      "summary": "Points-based system to look for work in Germany.",
+      "eligibility": [
+        "Basic German (A1) or English (B2)",
+        "Minimum points scored based on age, experience, etc."
+      ],
+      "fees": [
+        { "label": "Visa Fee", "amount": 75, "currency": "EUR", "source_url": "https://example.com" }
+      ],
+      "official_url": "https://www.make-it-in-germany.com",
+      "last_verified": "2026-10-10",
+      "verified": true
+    }
+  ],
+  "checklist": [
+    { "id": "passport", "label": "Valid Passport", "needs_translation": false, "needs_apostille": false },
+    { "id": "degree", "label": "University Degree", "needs_translation": true, "needs_apostille": true }
+  ],
+  "cities": [
+    { "name": "Berlin", "rent_range_eur": "800 - 1500", "note": "Tech hub, very international, housing crisis." },
+    { "name": "Munich", "rent_range_eur": "1200 - 2000", "note": "Expensive, strong economy, very safe." }
+  ],
+  "sources": [
+    { "label": "Make it in Germany", "url": "https://www.make-it-in-germany.com", "last_verified": "2026-10-10" }
+  ]
+}

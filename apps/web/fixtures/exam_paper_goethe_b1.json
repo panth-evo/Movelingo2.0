@@ -1,0 +1,254 @@
+{
+  "paper_id": "goethe_b1_mock_123",
+  "spec_id": "goethe_b1",
+  "language": "de",
+  "cefr": "B1",
+  "exam_name": "Goethe-Zertifikat B1",
+  "derived": false,
+  "status": "ready",
+  "parts_ready": 8,
+  "parts_total": 8,
+  "created_at": "2026-10-10T12:00:00Z",
+  "sections": [
+    {
+      "skill": "reading",
+      "duration_min": 65,
+      "instructions": "Lesen Sie die Texte und lösen Sie die Aufgaben.",
+      "parts": [
+        {
+          "part_id": "r_p1",
+          "part_no": 1,
+          "title": "Teil 1",
+          "task_type": "true_false_email",
+          "instructions": "Lesen Sie den Blog-Eintrag. Sind die Aussagen Richtig oder Falsch?",
+          "passage": [
+            "Hallo zusammen, ich bin vor einem Monat nach Berlin gezogen. Am Anfang war es schwer, eine Wohnung zu finden, aber jetzt lebe ich in Kreuzberg. Die Leute sind sehr freundlich, aber das Wetter ist im Moment schrecklich."
+          ],
+          "audio": null,
+          "items": [
+            {
+              "item_id": "r_p1_i1",
+              "type": "true_false",
+              "prompt": "Die Person lebt schon ein Jahr in Berlin.",
+              "options": [
+                { "key": "true", "text": "Richtig" },
+                { "key": "false", "text": "Falsch" }
+              ]
+            },
+            {
+              "item_id": "r_p1_i2",
+              "type": "true_false",
+              "prompt": "Sie hat schnell eine Wohnung gefunden.",
+              "options": [
+                { "key": "true", "text": "Richtig" },
+                { "key": "false", "text": "Falsch" }
+              ]
+            }
+          ],
+          "task": null
+        },
+        {
+          "part_id": "r_p2",
+          "part_no": 2,
+          "title": "Teil 2",
+          "task_type": "mcq_text",
+          "instructions": "Lesen Sie den Zeitungsartikel. Welche Antwort passt?",
+          "passage": [
+            "Die neue Bibliothek im Stadtzentrum wurde gestern eröffnet. Sie bietet nicht nur tausende Bücher, sondern auch kostenloses Internet und Arbeitsräume für Studenten. Der Bürgermeister sagte in seiner Rede, dass dies ein wichtiger Schritt für die Bildung sei."
+          ],
+          "audio": null,
+          "items": [
+            {
+              "item_id": "r_p2_i1",
+              "type": "mcq",
+              "prompt": "Was gibt es in der neuen Bibliothek?",
+              "options": [
+                { "key": "a", "text": "Nur Bücher." },
+                { "key": "b", "text": "Bücher und Internet." },
+                { "key": "c", "text": "Ein Café für Studenten." }
+              ]
+            }
+          ],
+          "task": null
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "duration_min": 40,
+      "instructions": "Hören Sie sich die Audio-Clips an.",
+      "parts": [
+        {
+          "part_id": "l_p1",
+          "part_no": 1,
+          "title": "Teil 1",
+          "task_type": "short_texts",
+          "instructions": "Hören Sie die Nachrichten. Welche Aussage ist richtig?",
+          "passage": [],
+          "audio": {
+            "lang": "de-DE",
+            "preview_seconds": 10,
+            "segments": [
+              {
+                "segment_id": "l_p1_s1",
+                "play_limit": 2,
+                "script": [
+                  { "speaker": "Ansagerin", "text": "Achtung am Gleis 4. Der Zug nach München hat voraussichtlich 20 Minuten Verspätung.", "voice_hint": "female_1" }
+                ]
+              },
+              {
+                "segment_id": "l_p1_s2",
+                "play_limit": 1,
+                "script": [
+                  { "speaker": "Arztpraxis", "text": "Guten Tag, hier ist die Praxis Dr. Müller. Ihr Termin morgen um 9 Uhr fällt leider aus.", "voice_hint": "male_1" }
+                ]
+              }
+            ]
+          },
+          "items": [
+            {
+              "item_id": "l_p1_i1",
+              "type": "true_false",
+              "prompt": "Der Zug nach München ist pünktlich.",
+              "options": [
+                { "key": "true", "text": "Richtig" },
+                { "key": "false", "text": "Falsch" }
+              ],
+              "segment_id": "l_p1_s1"
+            },
+            {
+              "item_id": "l_p1_i2",
+              "type": "true_false",
+              "prompt": "Der Arzttermin findet nicht statt.",
+              "options": [
+                { "key": "true", "text": "Richtig" },
+                { "key": "false", "text": "Falsch" }
+              ],
+              "segment_id": "l_p1_s2"
+            }
+          ],
+          "task": null
+        },
+        {
+          "part_id": "l_p2",
+          "part_no": 2,
+          "title": "Teil 2",
+          "task_type": "talk_or_announcement",
+          "instructions": "Hören Sie zu. Was ist richtig?",
+          "passage": [],
+          "audio": {
+            "lang": "de-DE",
+            "preview_seconds": 30,
+            "segments": [
+              {
+                "segment_id": "l_p2_s1",
+                "play_limit": 1,
+                "script": [
+                  { "speaker": "Sprecher", "text": "Willkommen im Museum. Bitte schalten Sie Ihre Handys aus. Das Fotografieren ist nur ohne Blitz erlaubt.", "voice_hint": "male_2" }
+                ]
+              }
+            ]
+          },
+          "items": [
+            {
+              "item_id": "l_p2_i1",
+              "type": "mcq",
+              "prompt": "Was ist im Museum verboten?",
+              "options": [
+                { "key": "a", "text": "Handys benutzen." },
+                { "key": "b", "text": "Fotos machen ohne Blitz." },
+                { "key": "c", "text": "Fotos machen mit Blitz." }
+              ],
+              "segment_id": "l_p2_s1"
+            }
+          ],
+          "task": null
+        }
+      ]
+    },
+    {
+      "skill": "writing",
+      "duration_min": 60,
+      "instructions": "Schreiben Sie die Texte.",
+      "parts": [
+        {
+          "part_id": "w_p1",
+          "part_no": 1,
+          "title": "Teil 1",
+          "task_type": "writing",
+          "instructions": "Informelle E-Mail.",
+          "passage": [],
+          "audio": null,
+          "items": [],
+          "task": {
+            "kind": "writing",
+            "prompt": "Sie haben am Wochenende einen tollen Ausflug gemacht. Schreiben Sie einem Freund/einer Freundin eine E-Mail darüber.",
+            "min_words": 80,
+            "max_words": 100,
+            "register": "informal",
+            "bullet_points": ["Wo waren Sie?", "Was haben Sie gemacht?", "Warum war es so schön?"]
+          }
+        },
+        {
+          "part_id": "w_p2",
+          "part_no": 2,
+          "title": "Teil 2",
+          "task_type": "writing",
+          "instructions": "Forumbeitrag.",
+          "passage": [],
+          "audio": null,
+          "items": [],
+          "task": {
+            "kind": "writing",
+            "prompt": "Schreiben Sie Ihre Meinung zum Thema 'Homeoffice'.",
+            "min_words": 80,
+            "max_words": 100,
+            "register": "informal",
+            "bullet_points": []
+          }
+        }
+      ]
+    },
+    {
+      "skill": "speaking",
+      "duration_min": 15,
+      "instructions": "Sprechen Sie.",
+      "parts": [
+        {
+          "part_id": "s_p1",
+          "part_no": 1,
+          "title": "Teil 1",
+          "task_type": "speaking",
+          "instructions": "Gemeinsam etwas planen.",
+          "passage": [],
+          "audio": null,
+          "items": [],
+          "task": {
+            "kind": "speaking",
+            "prompt": "Ein Kollege hat Geburtstag. Planen Sie ein Geschenk und eine kleine Feier.",
+            "prep_seconds": 60,
+            "speaking_seconds": 180,
+            "bullet_points": ["Was kaufen wir?", "Wann feiern wir?", "Wer kauft ein?"]
+          }
+        },
+        {
+          "part_id": "s_p2",
+          "part_no": 2,
+          "title": "Teil 2",
+          "task_type": "speaking",
+          "instructions": "Präsentation.",
+          "passage": [],
+          "audio": null,
+          "items": [],
+          "task": {
+            "kind": "speaking",
+            "prompt": "Präsentieren Sie das Thema 'Gesunde Ernährung im Alltag'.",
+            "prep_seconds": 60,
+            "speaking_seconds": 180,
+            "bullet_points": ["Ihre persönlichen Erfahrungen", "Situation in Ihrem Heimatland", "Vor- und Nachteile"]
+          }
+        }
+      ]
+    }
+  ]
+}
