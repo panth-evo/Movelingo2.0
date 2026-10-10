@@ -1,7 +1,7 @@
 import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
   SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData,
-  ReviewItem, TeachBackSession
+  ReviewItem, TeachBackSession, SkillNode
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -120,5 +120,14 @@ export const api = {
       concept: conceptId.replace(/_/g, ' '),
       instructions: `Explain to the AI how to use this concept. Give a real-world example related to relocating or renting.`
     }), 500));
+  },
+  getSkillMap: (): Promise<SkillNode[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([
+      { id: 'n1', title: 'Greetings & Introductions', description: 'Essential phrases for meeting locals and basic small talk.', status: 'mastered', mastery_percentage: 100, dependencies: [] },
+      { id: 'n2', title: 'Housing & Renting', description: 'Understanding contracts, flat viewings, and utilities.', status: 'learning', mastery_percentage: 60, dependencies: ['n1'] },
+      { id: 'n3', title: 'Bureaucracy & Visas', description: 'Navigating the Ausländerbehörde and official forms.', status: 'needs_practice', mastery_percentage: 30, dependencies: ['n1'] },
+      { id: 'n4', title: 'Healthcare & Medicine', description: 'Doctor appointments, symptoms, and insurance terms.', status: 'locked', mastery_percentage: 0, dependencies: ['n2', 'n3'] },
+      { id: 'n5', title: 'Workplace Communication', description: 'Professional emails, meetings, and interviews.', status: 'locked', mastery_percentage: 0, dependencies: ['n3'] }
+    ]), 600));
   },
 };

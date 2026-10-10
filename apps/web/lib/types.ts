@@ -297,3 +297,12 @@ export interface TeachBackSession {
   concept: string;
   instructions: string;
 }
+
+export interface SkillNode {
+  id: string;
+  title: string;
+  description: string;
+  status: 'mastered' | 'learning' | 'needs_practice' | 'locked';
+  mastery_percentage: number;
+  dependencies: string[];
+}
