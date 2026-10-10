@@ -333,3 +333,18 @@ export interface CountryData {
   healthcare_quality: string;
   cost_of_living_index: number;
 }
+
+export interface ChecklistItem {
+  id: string;
+  category: '24h' | 'week' | 'month';
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+export interface SimulatorScenario {
+  id: string;
+  title: string;
+  description: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+}

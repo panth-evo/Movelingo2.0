@@ -2,7 +2,7 @@ import {
   ProfileInput, PlanResult, RelocationInfo, ProgressResponse,
   SpecSummary, ExamPaper, SubmitInput, SectionResult, Language, LessonData,
   ReviewItem, TeachBackSession, SkillNode, TimelineEvent, EligibilityScore,
-  CountryData
+  CountryData, ChecklistItem, SimulatorScenario
 } from './types';
 
 const getUserId = () => typeof window !== 'undefined' ? localStorage.getItem('user_id') : null;
@@ -158,4 +158,29 @@ export const api = {
       { id: 'c3', country: 'Switzerland', flag: '🇨🇭', avg_rent_1bed: 1800, avg_salary_tech: 110000, visa_processing_weeks: 16, language_requirement: 'B2', healthcare_quality: 'World Class', cost_of_living_index: 122 }
     ]), 400));
   },
+  getArrivalChecklist: (): Promise<ChecklistItem[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([
+      { id: 'ch1', category: '24h', title: 'Buy a local SIM card', description: 'Needed for all registrations. Go to Aldi or Vodafone.', completed: true },
+      { id: 'ch2', category: '24h', title: 'Find temporary housing', description: 'Check into your Airbnb or hotel.', completed: true },
+      { id: 'ch3', category: 'week', title: 'Anmeldung (City Registration)', description: 'Register your address at the local Bürgeramt.', completed: false },
+      { id: 'ch4', category: 'week', title: 'Open a Bank Account', description: 'N26 or Sparkasse. Required to receive your salary.', completed: false },
+      { id: 'ch5', category: 'month', title: 'Get Health Insurance', description: 'TK or AOK. Give the number to your employer.', completed: false },
+      { id: 'ch6', category: 'month', title: 'Apply for Residence Permit', description: 'Book an appointment at the Ausländerbehörde.', completed: false },
+    ]), 400));
+  },
+  getSimulators: (): Promise<SimulatorScenario[]> => {
+    return new Promise(resolve => setTimeout(() => resolve([
+      { id: 'sim1', title: 'The Bürgeramt Registration', description: 'Roleplay your address registration. The clerk speaks fast.', difficulty: 'medium' },
+      { id: 'sim2', title: 'Opening a Bank Account', description: 'Answer questions about your income and passport.', difficulty: 'easy' },
+      { id: 'sim3', title: 'Apartment Viewing', description: 'Ask the landlord about the deposit (Kaution) and utilities (Nebenkosten).', difficulty: 'hard' },
+    ]), 400));
+  },
+  startSimulator: (id: string): Promise<{ session_id: string, initial_message: string }> => {
+    return new Promise(resolve => setTimeout(() => resolve({
+      session_id: `sim_session_${id}`,
+      initial_message: id === 'sim1' 
+        ? "Guten Tag! Haben Sie alle Ihre Dokumente für die Anmeldung dabei?"
+        : "Hallo, wie kann ich Ihnen heute helfen?"
+    }), 500));
+  }
 };
