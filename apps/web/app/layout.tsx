@@ -25,8 +25,11 @@ export default function RootLayout({
               <div className="hidden sm:flex gap-6 text-sm font-medium text-slate-600">
                 <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
                 <Link href="/dashboard" className="hover:text-blue-600 transition-colors">Dashboard</Link>
+                <Link href="/learn/skill-map" className="hover:text-blue-600 transition-colors">Learn</Link>
                 <Link href="/exams" className="hover:text-blue-600 transition-colors">Exams</Link>
-                <Link href="/move-plan" className="hover:text-blue-600 transition-colors">Move plan</Link>
+                <Link href="/tools/timeline" className="hover:text-blue-600 transition-colors">Timeline</Link>
+                <Link href="/tools/compare" className="hover:text-blue-600 transition-colors">Compare</Link>
+                <Link href="/admin" className="hover:text-red-600 font-bold transition-colors">Admin</Link>
               </div>
             </div>
           </nav>
