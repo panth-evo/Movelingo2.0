@@ -6,12 +6,16 @@ import { api } from '@/lib/api';
 import { Clock, ChevronRight } from 'lucide-react';
 import { ReadingView } from './ReadingView';
 import { ListeningPlayer } from './ListeningPlayer';
+import { WritingView } from './WritingView';
+import { SpeakingPlayer } from './SpeakingPlayer';
 
 export function PlayerShell({ paper }: { paper: ExamPaper }) {
   const router = useRouter();
   const [secIdx, setSecIdx] = useState(0);
   const [partIdx, setPartIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [texts, setTexts] = useState<Record<string, string>>({});
+  const [speaking, setSpeaking] = useState<Record<string, { transcript: string; duration_sec: number }>>({});
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [submitting, setSubmitting] = useState(false);
   
@@ -61,8 +65,8 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
       const payload: SubmitInput = {
         skill: section.skill,
         answers: answers,
-        texts: {},
-        speaking: {},
+        texts: texts,
+        speaking: speaking,
         time_spent_sec: (section.duration_min * 60) - (timeLeft || 0)
       };
       await api.submitExam(paper.paper_id, payload);
@@ -73,7 +77,7 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
         setSubmitting(false);
       } else {
         sessionStorage.removeItem(`exam_answers_${paper.paper_id}`);
-        router.push('/dashboard');
+        router.push(`/exams/${paper.paper_id}/results`);
       }
     } catch (e) {
       console.error(e);
@@ -90,6 +94,8 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
 
   if (!section || !part) return null;
   const isListening = section.skill === 'listening';
+  const isWriting = section.skill === 'writing';
+  const isSpeaking = section.skill === 'speaking';
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
@@ -115,17 +121,18 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
         </div>
       </div>
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
         {/* SIDEBAR NAV */}
-        <div className="w-72 bg-white border-r border-slate-200 p-4 overflow-y-auto shrink-0 flex flex-col gap-3 shadow-sm z-0">
-          <div className="text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-2">Navigation</div>
+        <div className="w-full lg:w-72 bg-white border-b lg:border-b-0 lg:border-r border-slate-200 p-4 overflow-x-auto lg:overflow-y-auto shrink-0 flex flex-row lg:flex-col gap-3 shadow-sm z-0">
+          <div className="hidden lg:block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-2">Navigation</div>
           {section.parts.map((p, i) => (
             <button
               key={p.part_id}
               disabled={isListening && i !== partIdx} // Strict sequential fixed order for listening
               onClick={() => setPartIdx(i)}
-              className={`text-left p-4 rounded-2xl border-2 transition-all ${
+              className={`text-left p-4 rounded-2xl border-2 transition-all min-w-[200px] lg:min-w-0 shrink-0 ${
                 i === partIdx ? 'bg-blue-50 border-blue-400 text-blue-900 shadow-sm' : 
+
                 (isListening && i !== partIdx) ? 'bg-slate-50 border-transparent text-slate-400 opacity-50 cursor-not-allowed' :
                 'bg-white border-slate-100 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
               }`}
@@ -141,6 +148,18 @@ export function PlayerShell({ paper }: { paper: ExamPaper }) {
           <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-sm p-8 min-h-[60vh]">
             {isListening ? (
               <ListeningPlayer part={part} answers={answers} onChange={updateAnswer} />
+            ) : isWriting ? (
+              <WritingView 
+                part={part} 
+                textValue={texts[part.part_id] || ''} 
+                onChangeText={(val) => setTexts(prev => ({ ...prev, [part.part_id]: val }))} 
+              />
+            ) : isSpeaking ? (
+              <SpeakingPlayer 
+                part={part} 
+                lang={paper.language} 
+                onFinish={(id, transcript, duration) => setSpeaking(prev => ({ ...prev, [id]: { transcript, duration_sec: duration } }))} 
+              />
             ) : (
               <ReadingView part={part} answers={answers} onChange={updateAnswer} />
             )}

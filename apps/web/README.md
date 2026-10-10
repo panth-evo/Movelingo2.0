@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MoveLingo: Web Frontend
 
-## Getting Started
+MoveLingo is the premiere relocation planner and language-learning engine. This Next.js 14 application is the main entry point for users aiming to build their move plan, track their visa-required language level, and conquer practice exams.
 
-First, run the development server:
+## Quick Start
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Install Dependencies**
+   ```bash
+   cd apps/web
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Configure Environment**
+   By default, the app is configured to point to the live Python FastAPI backend via `.env.local`. 
+   If you want to run completely offline without the backend, enable Fixtures mode:
+   ```bash
+   # In apps/web/.env.local
+   NEXT_PUBLIC_USE_FIXTURES=1
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## The "Six-Click Demo"
 
-## Learn More
+To explore the entire MoveLingo flow in less than two minutes, follow this script:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Start**: Navigate to `/` and click the main CTA to start your relocation plan.
+2. **Onboard**: Complete the quick 7-step profile builder (Personal, Work, Finance, etc.).
+3. **Placement**: Sit the simulated placement test on Step 8 and submit it to establish your baseline CEFR level.
+4. **Dashboard**: Arrive at `/dashboard`. Marvel at the six populated panels, specifically the animated `Language Tracker` showing the gap between your current level and the visa requirement.
+5. **Practice Picker**: Navigate to `/exams` and click **"One Part Drill"** on any available mock exam.
+6. **Execution**: Sit the strict, un-pausable mock exam. If it's a Speaking task, hit "Start Recording" to see the live Web Speech API transcript. Submit early to witness the pass/fail result grading!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+- Next.js 14 App Router
+- React 18
+- Tailwind CSS
+- Framer Motion (Animations)
+- Lucide React (Icons)
+- Web Speech API (TTS & STT)
